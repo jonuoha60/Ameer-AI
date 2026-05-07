@@ -2,7 +2,7 @@
   display: flex;
   height: 100vh;
   width: 100%;
-  overflow: hidden; /* ✅ prevents scroll bleed */
+  overflow: hidden; 
 }
 
 .top-nav {
@@ -96,7 +96,7 @@
   background: transparent;
   font-weight: 600;
   font-size: 14px;
-  width: 100%; /* ✅ prevents cut-off */
+  width: 100%; 
 }
 
 .input-field-route {
@@ -127,7 +127,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px; /* ✅ spacing fix */
+  gap: 10px; 
 }
 
 .budget-controls button {
@@ -219,6 +219,8 @@
   color: #4caf50;
 }
 
+
+
 .over-budget {
   font-size: 11px;
   color: red;
@@ -300,22 +302,18 @@
   padding: 14px;
   border-radius: 12px;
 
-  /* 🔥 no background like others */
   background: transparent;
 
-  /* 🔥 border line only */
   border: 1px solid #e5e7eb;
 
   margin-bottom: 15px;
   transition: all 0.2s ease;
 }
 
-/* subtle hover like your cards */
 .quick-time:hover {
   border-color: #cbd5e1;
 }
 
-/* label spacing */
 .quick-time-label {
   font-size: 13px;
   color: #6b7280;

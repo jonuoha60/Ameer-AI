@@ -122,7 +122,7 @@ JWT_ACCESS=
 
 Replace the placeholder values with your actual Gemini API keys JWT SECRETS.
 
-<!-- You can get a Gemini API key [here](https://aistudio.google.com/app/apikey) -->
+* You can get a Gemini API key [here](https://aistudio.google.com/app/apikey)
 
 * You can generate a JWT SECRET in the terminal using this command
 
@@ -201,9 +201,9 @@ Replace the placeholder values with your actual Gemini API keys JWT SECRETS.
 ## Front-End Design
 The front-end is built with Next.js and TailwindCSS, providing a smooth user experience for uploading, processing, and downloading images. The app is responsive and works across a variety of devices.
 
-<img src="demo/demo.png" width="500" />
-<img src="demo/demo2.png" width="500" />
-<img src="demo/demo3.png" width="500" />
+<img src="demo/demo.png" width="800" />
+<img src="demo/demo2.png" width="800" />
+<img src="demo/demo3.png" width="800" />
 
 ---
 

@@ -1,9 +1,9 @@
 // Signup.tsx
 import React, { useState } from "react";
-import { inputStyle, dividerStyle } from "../constants/styles/icons/index";
-import { GoogleIcon, GithubIcon } from "../constants/styles/icons/index";
+import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
+import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
 import { Header } from "./Header";
-import axios from "../components/api/api";
+import axios from "../../components/api/api";
 
 interface FocusedInputs {
   [key: string]: boolean;

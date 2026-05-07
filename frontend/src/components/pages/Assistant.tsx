@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../constants/styles/Assistant.css";
-import { LogoMark } from '../constants/styles/icons'
+import "../../constants/styles/Assistant.css";
+import { LogoMark } from '../../constants/styles/icons'
 import axios from "axios"
 import { Link, useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { useAuth } from "../hooks/useAuth";
-import { tripMessage } from "../utils/helper";
+import { useAuth } from "../../hooks/useAuth";
+import { tripMessage } from "../../utils/helper";
 
 interface Message {
   id: string;

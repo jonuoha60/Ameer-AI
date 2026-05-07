@@ -1,8 +1,8 @@
 import React from 'react'
-import "../constants/styles/Home.css"
-import { LogoMark } from '../constants/styles/icons'
+import "../../constants/styles/Home.css"
+import { LogoMark } from '../../constants/styles/icons'
 import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 interface Props {
     home: boolean

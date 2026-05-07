@@ -1,5 +1,4 @@
 import { Icons } from '../../constants/styles/icons';
-import { TransportList } from '../../pages/Transport';
 import type { TransportOption, TransportProps } from '../../types';
 
 
@@ -22,21 +21,31 @@ export const formatedDuration = (totalSeconds: number) => {
   };
 
   export const transportOptions = [
-    { id: "bike", Icon: Icons.Bike, name: "E-Bike / Scooter", sub: "Rental available", price: "$", time: "" },
+    { id: "bike", Icon: Icons.Bike, name: "E-Bike / Scooter", sub: "Rental available", price: "", time: "", best: false },
 
-    { id: "uber", Icon: Icons.Car, name: "Uber / Rideshare", sub: "Door to door", price: `$`, time: "Arrives in: 12 mins" },
-    { id: "bus", Icon: Icons.Bus, name: "City Bus", sub: "", price: "$", time: ""},
-    { id: "train", Icon: Icons.Train, name: "Train", sub: "Direct line", price: "$", time: ""  },
+    { id: "uber", Icon: Icons.Car, name: "Uber / Rideshare", sub: "Door to door", price: ``, time: "Arrives in: 12 mins", best: false },
+    { id: "bus", Icon: Icons.Bus, name: "City Bus", sub: "", price: "", time: "", best: false },
+    { id: "train", Icon: Icons.Train, name: "Train", sub: "Direct line", price: "", time: "", best: false },
   ];
 
-export const bestValueTransport = (TransportList: TransportOption[]) => {
+export const bestValueTransport = (TransportList: TransportOption[], budget: number): TransportOption | null => {
 
-  for (const transport of TransportList) {
-    const prices = transportOptions.map((option) => Number(option.price.replace("$", "")) || 0);
-    const time = transport.time;
-    const totalCost = Number(transport.price.replace("$", "")) || 0;
-    console.log("Prices:", transport.price);
+  let bestOption: TransportOption | null = null;
+
+  console.log("Budget:", budget);
+  console.log("Transport List:", TransportList);
+
+
+  for (const option of TransportList) {
+    const price = Number(option.price.replace("$", "") || 0);
+    console.log(`Evaluating ${option.name} with price ${price}`); 
+    if (price <= budget && price < (bestOption ? Number(bestOption.price.replace("$", "") || 0) : Infinity)) {
+    bestOption = option;
+    }
+    console.log(`bestOption is now: ${bestOption?.name || "None"}`);
   }
+
+  return bestOption
   
 }
 

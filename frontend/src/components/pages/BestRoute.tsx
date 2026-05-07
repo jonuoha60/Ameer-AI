@@ -4,13 +4,13 @@ import {
   AdvancedMarker,
   Polyline,
 } from "@vis.gl/react-google-maps";
-import "../constants/styles/Route.css";
-import { Icons } from "../constants/styles/icons";
+import "../../constants/styles/Route.css";
+import { Icons } from "../../constants/styles/icons";
 import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
-import { PlaceAutocomplete } from "../components/input/AutoComplete";
+import { PlaceAutocomplete } from "../../components/input/AutoComplete";
 import { TransportList } from "./Transport";
-import { useLocationService, useDistance, useUber, useTransit, useCycling } from '../hooks/useTransport';
-import { transportOptions } from "../utils/helper";
+import { useLocationService, useDistance, useUber, useTransit, useCycling } from '../../hooks/useTransport';
+import { transportOptions } from "../../utils/helper";
 
 export const BestRoute = () => {
   const [searchParams] = useSearchParams();

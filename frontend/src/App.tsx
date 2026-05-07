@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
-import Home from './pages/Home'
-import { Login } from './pages/Login'
-import { Signup } from './pages/Signup'
-import { BestRoute } from './pages/BestRoute'
-import { Assistant } from './pages/Assistant'
+import Home from './components/pages/Home'
+import { Login } from './components/pages/Login'
+import { Signup } from './components/pages/Signup'
+import { BestRoute } from './components/pages/BestRoute'
+import { Assistant } from './components/pages/Assistant'
 
 function App() {
 

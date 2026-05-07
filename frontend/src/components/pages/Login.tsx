@@ -1,11 +1,11 @@
 // Login.tsx
 import React, { useState } from "react";
-import { inputStyle, dividerStyle } from "../constants/styles/icons/index";
-import { GoogleIcon, GithubIcon } from "../constants/styles/icons/index";
-import "../constants/styles/Login.css";
+import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
+import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
+import "../../constants/styles/Login.css";
 import { Header } from "./Header";
-import { useAuth } from "../hooks/useAuth";
-import axios from "../components/api/api";
+import { useAuth } from "../../hooks/useAuth";
+import axios from "../../components/api/api";
 import { useNavigate } from "react-router-dom";
 
 interface FocusedInputs {

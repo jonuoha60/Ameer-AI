@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "../constants/styles/Home.css";
+import "../../constants/styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Header } from "./Header";
-import { Icons } from "../constants/styles/icons";
-import { PlaceAutocomplete } from "../components/input/AutoComplete";
-import Landing from "../assets/landing.png";
+import { Icons } from "../../constants/styles/icons";
+import { PlaceAutocomplete } from "../../components/input/AutoComplete";
+import Landing from "../../assets/landing.png";
 import { Footer } from "./Footer";
 
 const Home: React.FC = () => {

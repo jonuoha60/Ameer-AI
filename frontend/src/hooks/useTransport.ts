@@ -155,7 +155,7 @@ export const useCycling = () => {
       setDistanceData({
         distance: formattedDistance,
         duration: formattedDuration,
-        cost: `$${cost}`, 
+        cost: `${cost}`, 
       });
 
     } catch (err) {
