@@ -34,17 +34,17 @@ Make sure you have the following installed on your machine:
     npm install
     npm run dev
 ```
-runs on: http://localhost:3000
+http://localhost:3000
 
 **Backend Setup**
 
-```bash
+ ```bash
     cd backend
     go mod tidy
     go run main.go/air
 ```
 
-runs on: http://localhost:8080
+http://localhost:8080
 
 ---
 
@@ -201,9 +201,9 @@ Replace the placeholder values with your actual Gemini API keys JWT SECRETS.
 ## Front-End Design
 The front-end is built with Next.js and TailwindCSS, providing a smooth user experience for uploading, processing, and downloading images. The app is responsive and works across a variety of devices.
 
-<img src="demo/demo.png" width="300" />
-<img src="demo/demo2.png" width="300" />
-<img src="demo/demo3.png" width="300" />
+<img src="demo/demo.png" width="500" />
+<img src="demo/demo2.png" width="500" />
+<img src="demo/demo3.png" width="500" />
 
 ---
 
