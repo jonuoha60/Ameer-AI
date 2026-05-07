@@ -68,7 +68,7 @@ Ameer-AI/
 │   │   └── utils/           # Helper functions
 │   │
 │   ├── .env                 # Frontend environment variables
-│   ├── next.config.js
+│   ├── vite.config.js
 │   └── package.json
 │
 ├── backend/                 # Backend (Go API server)
