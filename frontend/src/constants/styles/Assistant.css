@@ -1,0 +1,312 @@
+
+
+/* ROOT */
+.assistant-root {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* MAIN */
+.assistant-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* HEADER */
+.assistant-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fbfdfd;
+    border-bottom: 1px solid #e2e8f0;
+
+  padding: 14px 20px;
+}
+
+
+
+
+
+.header-name {
+  font-weight: 400;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #111;
+  margin: 3px 0;
+}
+
+/* MESSAGES AREA */
+.messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.empty-icon {
+  font-size: 40px;
+}
+
+.empty-title {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.empty-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* SUGGESTIONS */
+.suggestions {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.suggestion-btn {
+  border: 1px solid #e5e7eb;
+  background: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.suggestion-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+
+/* MESSAGE ROW */
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.msg-row.user {
+  justify-content: flex-end;
+}
+
+.msg-row.ai {
+  justify-content: flex-start;
+}
+
+/* AVATAR */
+.msg-avatar {
+  font-size: 18px;
+}
+
+/* BUBBLE */
+.bubble {
+  max-width: 650px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
+
+  /* shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.bubble:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* USER MESSAGE */
+.bubble.user {
+  background: #ffffff;
+  color: #111;
+  box-shadow: 0 0px 4px rgba(53, 53, 53, 0.35);
+}
+
+/* AI MESSAGE */
+.bubble.ai {
+  background: #f1f5f9;
+  color: #111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* TEXT */
+.bubble-text {
+  margin-bottom: 6px;
+}
+
+/* TIME */
+.bubble-time {
+  font-size: 11px;
+  opacity: 0.6;
+  text-align: right;
+}
+
+/* INPUT AREA (floating style) */
+.input-area {
+  border-top: none;
+  background: transparent;
+  padding: 16px;
+}
+
+/* INPUT BOX (ChatGPT style) */
+.input-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+
+  background: white;
+  border-radius: 20px;
+  padding: 12px 14px;
+
+  border: 1px solid #e5e7eb;
+
+  /* floating effect */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+  max-width: 800px;
+  margin: 0 auto;
+
+  transition: all 0.2s ease;
+}
+
+/* FOCUS EFFECT */
+.input-box:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+}
+
+/* TEXTAREA */
+.input-textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  max-height: 160px;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+
+/* SEND BUTTON */
+.send-btn {
+  background: #2563eb;
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* INPUT HINT */
+.input-hint {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* TYPING */
+.typing {
+  display: flex;
+  gap: 4px;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #999;
+  border-radius: 50%;
+  animation: blink 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* SIDEBAR */
+.assistant-sidebar {
+  position: fixed;
+  left: -260px;
+  top: 0;
+  width: 260px;
+  height: 100%;
+  background: #111827;
+  color: white;
+  padding: 16px;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.assistant-sidebar.open {
+  left: 0;
+}
+
+/* OVERLAY */
+.assistant-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 5;
+}

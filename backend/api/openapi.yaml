@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  title: Ameer AI API
+  description: AI-powered trip budgeting, navigation, and transport planning system
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+
+  # =========================
+  # USER AUTH ROUTES
+  # =========================
+
+  /user/signup:
+    post:
+      tags:
+        - Authentication
+      summary: Create a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - username
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: User created successfully
+
+  /user/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login user and return tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Login successful, returns access & refresh tokens
+
+  /user:
+    get:
+      tags:
+        - Authentication
+      summary: Get authenticated user profile
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Returns user profile data
+
+  # =========================
+  # TRANSPORT ROUTES
+  # =========================
+
+  /transport/uber:
+    post:
+      tags:
+        - Transport
+      summary: Get Uber pricing estimate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                destination:
+                  type: string
+      responses:
+        200:
+          description: Returns Uber price estimate
+
+  /transport/transit:
+    post:
+      tags:
+        - Transport
+      summary: Get public transit options
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                destination:
+                  type: string
+      responses:
+        200:
+          description: Returns transit routes and options
+
+  # =========================
+  # LOCATION / MAPS ROUTES
+  # =========================
+
+  /location:
+    post:
+      tags:
+        - Maps
+      summary: Get geolocation data from input
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+      responses:
+        200:
+          description: Returns latitude and longitude
+
+  /location/place:
+    post:
+      tags:
+        - Maps
+      summary: Get place details using Google Places API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+      responses:
+        200:
+          description: Returns place information
+
+  /location/distance:
+    post:
+      tags:
+        - Maps
+      summary: Calculate distance between two locations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                origin:
+                  type: string
+                destination:
+                  type: string
+      responses:
+        200:
+          description: Returns distance and travel duration
+
+  /refresh:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token using refresh token
+      description: Generates a new access token (and optionally rotates refresh token) using a valid refresh token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+                  description: The user's valid refresh token
+      responses:
+        200:
+          description: Successfully refreshed access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: New JWT access token
+        401:
+          description: Invalid or expired refresh token
+
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

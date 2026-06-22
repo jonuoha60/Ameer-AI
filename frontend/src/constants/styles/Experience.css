@@ -1,0 +1,81 @@
+.experience-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.experience-card {
+  width: 100%;
+  max-width: 850px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.experience-card h1 {
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.experience-subtitle {
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.field label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #2563eb;
+}
+
+.experience-btn {
+  width: 100%;
+  border: none;
+  background: #111827;
+  color: white;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.experience-btn:hover {
+  background: #1f2937;
+}
+
+@media (max-width: 768px) {
+  .experience-card {
+    padding: 20px;
+  }
+}
