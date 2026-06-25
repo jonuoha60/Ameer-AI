@@ -20,9 +20,9 @@ type Config struct {
 
 func Load() (Config, error) {
 
-	if err := godotenv.Load(); err != nil {
-		return Config{}, fmt.Errorf("Failed to load env")
-	}
+	if os.Getenv("ENV") != "production" {
+    _ = godotenv.Load()
+}
 
 	mongoURI, err := extractEnv("MONGO_URI")
 
