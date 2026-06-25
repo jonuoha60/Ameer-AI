@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../../constants/styles/Profile.css";
 import { useAuth } from "../../hooks/useAuth";
 import { Header } from "./Header";
@@ -9,13 +9,9 @@ export const Profile = () => {
   const { auth } = useAuth();
 
   const [bio, setBio] = useState("");
-  const [isSaved, setIsSaved] = useState(false);
   const [trips, setTrips] = useState([]);
   const [experiences, setExperiences] = useState<any[]>([]);
-  const [postText, setPostText] = useState("");
-  const [posts, setPosts] = useState<any[]>([]);
-  const [postImage, setPostImage] = useState<File | null>(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -74,28 +70,6 @@ export const Profile = () => {
     });
   };
 
-  const handleCreatePost = async () => {
-  if (!postText.trim()) return;
-
-  const newPost = {
-    id: Date.now(),
-    user: auth?.username,
-    avatar: auth?.photo_url,
-    text: postText,
-    image: postImage ? URL.createObjectURL(postImage) : null,
-    createdAt: new Date().toISOString(),
-  };
-
-  setPosts([newPost, ...posts]);
-  setPostText("");
-  setPostImage(null);
-};
-
-const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (e.target.files?.[0]) {
-    setPostImage(e.target.files[0]);
-  }
-};
 
   return (
     <div>
@@ -125,10 +99,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               <input
                 type="text"
                 value={bio}
-                onChange={(e) => {
-                  setBio(e.target.value);
-                  setIsSaved(false);
-                }}
+                onChange={(e) => setBio(e.target.value)}
                 placeholder="Write a short bio..."
               />
 

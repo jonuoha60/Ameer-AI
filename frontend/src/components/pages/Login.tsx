@@ -1,5 +1,5 @@
 // Login.tsx
-import React, { useState } from "react";
+import { useState, type CSSProperties, type FormEvent } from "react";
 import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
 import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
 import "../../constants/styles/Login.css";
@@ -7,9 +7,8 @@ import { Header } from "./Header";
 import { useAuth } from "../../hooks/useAuth";
 import axios from "../../libs/utils/api/index";
 import { useNavigate } from "react-router-dom";
-import { oauthSignIn } from "../../app/(auth)/signin";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {auth} from "../../firebase/client" 
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../../firebase/client";
 
 interface FocusedInputs {
   [key: string]: boolean;
@@ -17,7 +16,6 @@ interface FocusedInputs {
 
 export const Login = () => {
   const [focused, setFocused] = useState<FocusedInputs>({});
-  const [hoveredBtn, setHoveredBtn] = useState<string | null>(null);
   const [error, setError] = useState<{
     email?: string;
     password?: string;
@@ -37,7 +35,7 @@ export const Login = () => {
   const handleBlur = (field: string) =>
     setFocused((p) => ({ ...p, [field]: false }));
 
-  const getInputStyle = (field: string): React.CSSProperties => ({
+  const getInputStyle = (field: string): CSSProperties => ({
     ...inputStyle,
     borderColor: focused[field] ? "#111" : "#e2e2e2",
     boxShadow: focused[field] ? "0 0 0 3px rgba(0,0,0,0.06)" : "none",
@@ -61,7 +59,7 @@ export const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!validate()) {
@@ -149,9 +147,7 @@ const handleGoogleSignIn = async () => {
                 key={id}
                 type="button"
                 className="auth-oauth-btn"
-                onMouseEnter={() => setHoveredBtn(id)}
                 onClick={handleGoogleSignIn}
-                onMouseLeave={() => setHoveredBtn(null)}
               >
                 {icon}
                 <span>{label}</span>
@@ -214,8 +210,6 @@ const handleGoogleSignIn = async () => {
               type="submit"
               className="auth-submit-btn"
               disabled={loading}
-              onMouseEnter={() => setHoveredBtn("submit")}
-              onMouseLeave={() => setHoveredBtn(null)}
             >
               {loading ? "Signing in..." : "Continue"}
             </button>

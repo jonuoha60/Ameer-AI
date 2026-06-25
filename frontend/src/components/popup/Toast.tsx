@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../constants/styles/Toast.css";
 
 interface ToastProps {
-  message: string;
+  message: React.ReactNode;
   show: boolean;
   duration?: number;
 }

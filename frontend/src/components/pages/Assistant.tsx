@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import "../../constants/styles/Assistant.css";
 import { LogoMark } from '../../constants/styles/icons'
 import axios from "axios"
@@ -29,7 +29,6 @@ export const Assistant = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -108,14 +107,12 @@ useEffect(() => {
     }
   };
 
-  const handleKey = (e: React.KeyboardEvent) => {
+  const handleKey = (e: KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
   };
-
-  const clearChat = () => setMessages([]);
 
   const formatTime = (d: Date) =>
     d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../../constants/styles/Home.css";
 import { LogoMark } from "../../constants/styles/icons";
 import { useNavigate, Link } from "react-router-dom";
@@ -10,7 +10,7 @@ interface Props {
 
 export const Header = ({ home }: Props) => {
   const navigate = useNavigate();
-  const { auth, isAuthenticated, logoutUser } = useAuth();
+  const { auth, isAuthenticated } = useAuth();
 
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -86,7 +86,6 @@ export const Header = ({ home }: Props) => {
               <div
                 className="dropdown-item danger"
                 onClick={() => {
-                  logoutUser();
                   setOpen(false);
                   navigate("/login");
                 }}

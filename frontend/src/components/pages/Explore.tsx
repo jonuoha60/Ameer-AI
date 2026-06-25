@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../../constants/styles/Explore.css";
 import { Header } from "./Header";
 

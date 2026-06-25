@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import "../../constants/styles/Experience.css";
 import axios from "../../libs/utils/api";
 import { Toast } from "../popup/Toast";
-import { useNavigate } from "react-router-dom";
 
 export const Experience = () => {
   const [title, setTitle] = useState("");
@@ -13,11 +12,10 @@ export const Experience = () => {
   const [transport, setTransport] = useState("");
   const [budget, setBudget] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [toastMessage, setToastMessage] = useState("");
+  const [toastMessage, setToastMessage] = useState<ReactNode>("");
   const [showToast, setShowToast] = useState(false);
-  const navigate = useNavigate()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
@@ -35,22 +33,19 @@ export const Experience = () => {
         formData.append("image", image);
       }
 
-      const res = await axios.post("/experience/create", formData, 
-        {}
-
-      );
+      await axios.post("/experience/create", formData);
       
-        setToastMessage(
+      setToastMessage(
         <span>
-            🎉 Experience posted successfully!{" "}
-            <a
+          🎉 Experience posted successfully!{" "}
+          <a
             href="/profile"
             style={{ color: "#60a5fa", fontWeight: 600, marginLeft: "6px" }}
-            >
+          >
             Check it out
-            </a>
+          </a>
         </span>
-        );
+      );
       setShowToast(true);
 
       // reset form

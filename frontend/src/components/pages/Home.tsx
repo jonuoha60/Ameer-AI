@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../../constants/styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -13,8 +13,7 @@ const Home: React.FC = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [budget, setBudget] = useState("");
-  const [destType, setDestType] = useState("");
-  const [selectedCard, setSelectedCard] = useState<string | null>("bus");
+  const [destType] = useState("");
   const [longitude, setLongitude] = useState<number | null>(null);
   const [latitude, setLatitude] = useState<number | null>(null);
   const [secondLongitude, setSecondLongitude] = useState<number | null>(null);
@@ -49,15 +48,12 @@ const Home: React.FC = () => {
   
 
   try {
-    const res = await axios.post("http://localhost:8080/location", {
+    await axios.post("http://localhost:8080/location", {
       longitude: crd.longitude,
-      latitude: crd.latitude
-    })
+      latitude: crd.latitude,
+    });
 
-    // if (res.data) {
-    //   setFrom(res.data.address)
-      
-    // }
+    // if the backend returns an address, assign it here.
 
     
   }catch(err) {

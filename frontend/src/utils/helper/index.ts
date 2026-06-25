@@ -1,5 +1,5 @@
 import { Icons } from '../../constants/styles/icons';
-import type { TransportOption, TransportProps } from '../../types';
+import type { TransportOption } from '../../types';
 
 
 export const formatedDuration = (totalSeconds: number) => {

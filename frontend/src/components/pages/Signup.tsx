@@ -1,5 +1,5 @@
 // Signup.tsx
-import React, { useState } from "react";
+import { useState, type CSSProperties, type FormEvent } from "react";
 import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
 import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
 import { Header } from "./Header";
@@ -11,7 +11,6 @@ interface FocusedInputs {
 
 export const Signup = () => {
   const [focused, setFocused] = useState<FocusedInputs>({});
-  const [hoveredBtn, setHoveredBtn] = useState<string | null>(null);
   const [error, setError] = useState<{
       email?: string;
       password?: string;
@@ -31,7 +30,7 @@ export const Signup = () => {
   const handleBlur = (field: string) =>
     setFocused((p) => ({ ...p, [field]: false }));
 
-  const getInputStyle = (field: string): React.CSSProperties => ({
+  const getInputStyle = (field: string): CSSProperties => ({
     ...inputStyle,
     borderColor: focused[field] ? "#111" : "#e2e2e2",
     boxShadow: focused[field] ? "0 0 0 3px rgba(0,0,0,0.06)" : "none",
@@ -66,7 +65,7 @@ export const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!validate()) {
@@ -137,8 +136,6 @@ export const Signup = () => {
                 key={id}
                 type="button"
                 className="auth-oauth-btn"
-                onMouseEnter={() => setHoveredBtn(id)}
-                onMouseLeave={() => setHoveredBtn(null)}
               >
                 {icon}
                 <span>{label}</span>
@@ -211,8 +208,6 @@ export const Signup = () => {
               type="submit"
               className="auth-submit-btn"
               disabled={loading}
-              onMouseEnter={() => setHoveredBtn("submit")}
-              onMouseLeave={() => setHoveredBtn(null)}
             >
               {loading ? "Creating..." : "Create account"}
             </button>

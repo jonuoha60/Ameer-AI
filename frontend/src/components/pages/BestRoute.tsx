@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import {
   Map,
   AdvancedMarker,
@@ -12,13 +12,11 @@ import { TransportList } from "./Transport";
 import { useLocationService, useDistance, useUber, useTransit, useCycling } from '../../hooks/useTransport';
 import { transportOptions } from "../../utils/helper";
 import axios from "../../libs/utils/api"
-import useRefreshToken from "../../hooks/useRefresh";
 import { Toast } from "../popup/Toast";
 
 export const BestRoute = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
-  const axiosPrivate = useRefreshToken()
   const { firstId, secondId, lng, lat, lng2, lat2 } = location.state || {};
 
   const fromLocation = searchParams.get("from");
@@ -49,7 +47,7 @@ export const BestRoute = () => {
 
   const navigate = useNavigate()
 
-  const handleModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setMode(e.target.value);
   };
 
@@ -137,7 +135,7 @@ useEffect(() => {
       const payload = {
         from,
         to,
-        budget: parseFloat(budget),
+        budget,
 
         distance: distanceData?.distance || "",
         duration: distanceData?.duration || "",
@@ -233,8 +231,10 @@ const handleSwitch = async () => {
                 placeholder=""
                 value={from}
                 callFunc={setFrom}
+                onBlur={() => {}}
                 onPlaceSelect={async (place) => {
-                if (!place) return;
+                const location = place?.geometry?.location;
+                if (!place || !location) return;
               
                 if (place.formatted_address) {
                 setFrom(place.formatted_address);
@@ -243,13 +243,13 @@ const handleSwitch = async () => {
                 const placeId = place.place_id;
                 if (placeId) {
                 setFirstPlaceId(placeId)
-                setPath((prev => {
+                setPath((prev) => {
                         const newStart = {
-                        lat: place.geometry.location.lat(),
-                        lng: place.geometry.location.lng(),
+                        lat: location.lat(),
+                        lng: location.lng(),
                   }
                           return [newStart, prev[1]]
-                            }))
+                            })
                           };
 
               
@@ -278,8 +278,10 @@ onClick={handleSwitch}
                 placeholder=""
                 value={to}
                 callFunc={setTo}
+                onBlur={() => {}}
                 onPlaceSelect={(place) => {
-                              if (!place) return;
+                              const location = place?.geometry?.location;
+                              if (!place || !location) return;
               
                               if (place.formatted_address) {
                                 setTo(place.formatted_address);
@@ -289,8 +291,8 @@ onClick={handleSwitch}
                                 setSecondPlaceId(placeId)
                                 setPath((prev) => {
                                   const newEnd = {
-                                lat: place.geometry.location.lat(),
-                                lng: place.geometry.location.lng(),
+                                lat: location.lat(),
+                                lng: location.lng(),
                               }
 
                               return [prev[0], newEnd]
@@ -434,7 +436,7 @@ onClick={handleSwitch}
   busData={busData}
   trainData={trainData}
   uberPrice={uberPrice}
-  bikeMinutes={distanceDataCycling?.duration}
+  bikeMinutes={distanceDataCycling?.duration || ""}
   bikeCost={distanceDataCycling?.cost}
   budget={budget}
 />
