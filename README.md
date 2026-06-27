@@ -105,6 +105,13 @@ Create a new file named `.env` in the frontend of your project and add the follo
 VITE_CLERK_PUBLISHABLE_KEY=
 VITE_GOOGLE_MAP_API=
 VITE_BASE_URL=http://localhost:8080
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
 ```
 - 📁 Backend .env.local
 ```env
@@ -115,6 +122,7 @@ GOOGLE_MAP_API=
 GEMINI_API_KEY=
 JWT_REFRESH=
 JWT_ACCESS=
+FIREBASE_CREDENTIALS=secrets/firebase-service-account.json
 ```
 
 ## Configure

@@ -3,6 +3,7 @@ import "../../constants/styles/Home.css";
 import { LogoMark } from "../../constants/styles/icons";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import axios from "../../libs/utils/api/index";
 
 interface Props {
   home: boolean;
@@ -28,6 +29,21 @@ export const Header = ({ home }: Props) => {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const logout = async () => {
+    try {
+      const res = await axios.post(`/user/logout`, {
+      });
+
+      if (res.status === 200) {
+        navigate("/login");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch(err) {
+      console.log("Logout error:", err);
+    }
+  }
 
   return (
     <nav className="navbar">
@@ -85,10 +101,7 @@ export const Header = ({ home }: Props) => {
 
               <div
                 className="dropdown-item danger"
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/login");
-                }}
+                onClick={logout}
               >
                 Sign out
               </div>
