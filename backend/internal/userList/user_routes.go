@@ -14,5 +14,6 @@ func RegisterRoutes(r *gin.Engine, db *mongo.Database, jwtRefresh string, jwtAcc
 		userGroup.POST("/google/login", h.GoogleCreateUser)
 		userGroup.POST("/signup", h.CreateUser)
 		userGroup.POST("/login", h.GetUser)
+		userGroup.POST("/logout", h.LogoutUser)
 	}
 }
