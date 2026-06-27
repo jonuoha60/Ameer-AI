@@ -1,14 +1,13 @@
 // Login.tsx
 import { useState, type CSSProperties, type FormEvent } from "react";
 import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
-import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
+import { GoogleIcon } from "../../constants/styles/icons/index";
 import "../../constants/styles/Login.css";
 import { Header } from "./Header";
 import { useAuth } from "../../hooks/useAuth";
 import axios from "../../libs/utils/api/index";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../../firebase/client";
+
 import { useGoogleSignIn } from "../../libs/actions/GoogleLogin";
 
 interface FocusedInputs {

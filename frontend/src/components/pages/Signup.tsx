@@ -1,7 +1,7 @@
 // Signup.tsx
 import { useState, type CSSProperties, type FormEvent } from "react";
 import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
-import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
+import { GoogleIcon } from "../../constants/styles/icons/index";
 import { Header } from "./Header";
 import axios from "../../libs/utils/api";
 import { Link } from "react-router-dom";
