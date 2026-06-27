@@ -29,9 +29,6 @@ type RefreshResponse struct {
 
 func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse, error) {
 
-	// ---------------------------------------------------
-	// 1. SINGLE SOURCE OF TRUTH (DB ONLY)
-	// ---------------------------------------------------
 	existingToken, err := s.repo.ValidateRefreshToken(ctx, oldToken)
 	if err != nil {
 		return RefreshResponse{}, err
@@ -40,9 +37,6 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 	userID := existingToken.UserID.Hex()
 	role := existingToken.Role
 
-	// ---------------------------------------------------
-	// 2. GENERATE NEW TOKENS
-	// ---------------------------------------------------
 	newAccess, newRefresh, err := auth.CreateTokenPair(
 		s.jwtRefresh,
 		s.jwtAccess,
@@ -53,9 +47,6 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 		return RefreshResponse{}, fmt.Errorf("failed to create token pair: %w", err)
 	}
 
-	// ---------------------------------------------------
-	// 3. ATOMIC ROTATION (NO DELETE, NO RACE CONDITION)
-	// ---------------------------------------------------
 	err = s.repo.RotateRefreshToken(ctx, oldToken, models.RefreshToken{
 		UserID:    existingToken.UserID,
 		Token:     newRefresh,
@@ -63,6 +54,7 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 		ExpiresAt: time.Now().Add(7 * 24 * time.Hour),
 		CreatedAt: time.Now(),
 	})
+
 	if err != nil {
 		return RefreshResponse{}, fmt.Errorf("refresh token rotation failed: %w", err)
 	}

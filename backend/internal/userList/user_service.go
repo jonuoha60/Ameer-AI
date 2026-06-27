@@ -80,8 +80,10 @@ func (s *Service) Login(ctx context.Context, email, password string) (AuthRespon
 	now := time.Now().UTC()
 
 	cookiesRefreshToken := models.RefreshToken{
-		UserID:    user.ID,
-		Token:     rt,
+		UserID: user.ID,
+		Token:  rt,
+		Role:   user.Role,
+
 		ExpiresAt: now.Add(7 * 24 * time.Hour),
 		CreatedAt: now,
 	}

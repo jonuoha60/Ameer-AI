@@ -35,25 +35,25 @@ func (h *Handler) RefreshToken(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie(
-		"refresh_token",
-		resp.RefreshToken,
-		7*24*3600,
-		"/",
-		"",
-		true,
-		true,
-	)
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:     "refresh_token",
+		Value:    resp.RefreshToken,
+		Path:     "/",
+		MaxAge:   7 * 24 * 3600,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+	})
 
-	c.SetCookie(
-		"access_token",
-		resp.AccessToken,
-		15*60, // 15 minutes
-		"/",
-		"",
-		true,
-		true,
-	)
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:     "access_token",
+		Value:    resp.AccessToken,
+		Path:     "/",
+		MaxAge:   15 * 60,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+	})
 
 	c.JSON(http.StatusOK, gin.H{
 		"access_token": resp.AccessToken,

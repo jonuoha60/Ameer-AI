@@ -22,18 +22,14 @@ func NewRepo(db *mongo.Database) *Repo {
 }
 
 func (r *Repo) RotateRefreshToken(ctx context.Context, oldToken string, newToken models.RefreshToken) error {
-
-	filter := bson.M{
-		"token": oldToken,
-	}
+	filter := bson.M{"token": oldToken}
 
 	update := bson.M{
-		"$set": bson.M{
-			"token":     newToken.Token,
-			"userID":    newToken.UserID,
-			"role":      newToken.Role,
-			"expiresAt": newToken.ExpiresAt,
-			"createdAt": newToken.CreatedAt,
+		"$set": newToken,
+		"$unset": bson.M{
+			"userID":    "",
+			"expiresAt": "",
+			"createdAt": "",
 		},
 	}
 
