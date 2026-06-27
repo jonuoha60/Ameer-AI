@@ -23,7 +23,9 @@ func NewRepo(db *mongo.Database) *Repo {
 
 func (r *Repo) RotateRefreshToken(ctx context.Context, oldToken string, newToken models.RefreshToken) error {
 
-	filter := bson.M{"token": oldToken}
+	filter := bson.M{
+		"token": oldToken,
+	}
 
 	update := bson.M{
 		"$set": bson.M{
@@ -40,8 +42,8 @@ func (r *Repo) RotateRefreshToken(ctx context.Context, oldToken string, newToken
 		return err
 	}
 
-	if res.MatchedCount == 0 {
-		return fmt.Errorf("refresh token already used or invalid")
+	if res.MatchedCount != 1 || res.ModifiedCount != 1 {
+		return fmt.Errorf("refresh token already used or rotated")
 	}
 
 	return nil

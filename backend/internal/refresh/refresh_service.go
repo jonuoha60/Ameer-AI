@@ -29,24 +29,20 @@ type RefreshResponse struct {
 
 func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse, error) {
 
-	token, err := auth.ValidateToken(oldToken, s.jwtRefresh)
-	if err != nil {
-		return RefreshResponse{}, fmt.Errorf("invalid token signature")
-	}
-
-	claims, ok := token.Claims.(*auth.Claims)
-	if !ok || !token.Valid {
-		return RefreshResponse{}, fmt.Errorf("invalid token claims")
-	}
-
+	// ---------------------------------------------------
+	// 1. SINGLE SOURCE OF TRUTH (DB ONLY)
+	// ---------------------------------------------------
 	existingToken, err := s.repo.ValidateRefreshToken(ctx, oldToken)
 	if err != nil {
 		return RefreshResponse{}, err
 	}
 
-	role := claims.Role
-	userID := claims.Subject
+	userID := existingToken.UserID.Hex()
+	role := existingToken.Role
 
+	// ---------------------------------------------------
+	// 2. GENERATE NEW TOKENS
+	// ---------------------------------------------------
 	newAccess, newRefresh, err := auth.CreateTokenPair(
 		s.jwtRefresh,
 		s.jwtAccess,
@@ -54,9 +50,12 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 		role,
 	)
 	if err != nil {
-		return RefreshResponse{}, err
+		return RefreshResponse{}, fmt.Errorf("failed to create token pair: %w", err)
 	}
 
+	// ---------------------------------------------------
+	// 3. ATOMIC ROTATION (NO DELETE, NO RACE CONDITION)
+	// ---------------------------------------------------
 	err = s.repo.RotateRefreshToken(ctx, oldToken, models.RefreshToken{
 		UserID:    existingToken.UserID,
 		Token:     newRefresh,
@@ -64,16 +63,21 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 		ExpiresAt: time.Now().Add(7 * 24 * time.Hour),
 		CreatedAt: time.Now(),
 	})
-
 	if err != nil {
-		return RefreshResponse{}, fmt.Errorf("failed to rotate token: %w", err)
+		return RefreshResponse{}, fmt.Errorf("refresh token rotation failed: %w", err)
 	}
 
+	// ---------------------------------------------------
+	// 4. FETCH USER
+	// ---------------------------------------------------
 	user, err := s.repo.GetUserByID(ctx, userID)
 	if err != nil {
-		return RefreshResponse{}, fmt.Errorf("failed to retrieve user information")
+		return RefreshResponse{}, fmt.Errorf("failed to fetch user: %w", err)
 	}
 
+	// ---------------------------------------------------
+	// 5. RETURN CLEAN RESPONSE
+	// ---------------------------------------------------
 	return RefreshResponse{
 		AccessToken:  newAccess,
 		RefreshToken: newRefresh,
