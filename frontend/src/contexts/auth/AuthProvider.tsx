@@ -26,7 +26,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loginUser({
             user: res.user,
             accessToken: res.access_token,
-            refreshToken: res.refresh_token,
         });
 
         } catch (err) {

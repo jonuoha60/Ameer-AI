@@ -78,7 +78,10 @@ export const Login = () => {
       const data = res.data;
 
       if(res.data) {
-         loginUser(data.user); 
+         loginUser({
+            user: res.data.user,
+            accessToken: res.data.access_token,
+        }); 
          navigate("/")
       }
 
