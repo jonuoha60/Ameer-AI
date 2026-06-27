@@ -11,7 +11,7 @@ interface Props {
 
 export const Header = ({ home }: Props) => {
   const navigate = useNavigate();
-  const { auth, isAuthenticated } = useAuth();
+  const { auth, isAuthenticated, logoutUser } = useAuth();
 
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,6 +36,7 @@ export const Header = ({ home }: Props) => {
       });
 
       if (res.status === 200) {
+        await logoutUser();
         navigate("/login");
       } else {
         console.error("Logout failed");
