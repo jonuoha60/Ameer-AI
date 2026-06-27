@@ -41,7 +41,7 @@ func (h *Handler) RefreshToken(c *gin.Context) {
 		7*24*3600,
 		"/",
 		"",
-		false,
+		true,
 		true,
 	)
 
@@ -51,7 +51,7 @@ func (h *Handler) RefreshToken(c *gin.Context) {
 		15*60, // 15 minutes
 		"/",
 		"",
-		false,
+		true,
 		true,
 	)
 

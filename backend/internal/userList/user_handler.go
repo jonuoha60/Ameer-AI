@@ -3,7 +3,6 @@ package userList
 import (
 	"go-modules/internal/models"
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -88,15 +87,13 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	isProd := os.Getenv("GIN_MODE") == "release"
-
 	c.SetCookie(
 		"refresh_token",
 		created.RefreshToken,
 		60*60*24*7,
 		"/",
 		"",
-		isProd,
+		true,
 		true,
 	)
 
@@ -106,7 +103,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		60*15,
 		"/",
 		"",
-		isProd,
+		true,
 		true,
 	)
 
