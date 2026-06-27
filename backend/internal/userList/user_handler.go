@@ -40,25 +40,25 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie(
-		"refresh_token",
-		created.RefreshToken,
-		60*60*24*7,
-		"/",
-		"",
-		true,
-		true,
-	)
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:     "refresh_token",
+		Value:    created.RefreshToken,
+		Path:     "/",
+		MaxAge:   60 * 60 * 24 * 7,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+	})
 
-	c.SetCookie(
-		"access_token",
-		created.AccessToken,
-		60*15,
-		"/",
-		"",
-		true,
-		true,
-	)
+	http.SetCookie(c.Writer, &http.Cookie{
+		Name:     "access_token",
+		Value:    created.AccessToken,
+		Path:     "/",
+		MaxAge:   60 * 15,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+	})
 
 	c.JSON(http.StatusCreated, created)
 }
