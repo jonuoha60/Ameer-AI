@@ -138,7 +138,7 @@ func (h *Handler) GetUser(c *gin.Context) {
 		MaxAge:   60 * 60 * 24 * 7,
 		HttpOnly: true,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 	})
 
 	http.SetCookie(c.Writer, &http.Cookie{
@@ -148,7 +148,7 @@ func (h *Handler) GetUser(c *gin.Context) {
 		MaxAge:   60 * 15,
 		HttpOnly: true,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 	})
 
 	c.JSON(http.StatusOK, user)
