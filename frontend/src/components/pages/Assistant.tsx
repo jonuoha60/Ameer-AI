@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import "../../constants/styles/Assistant.css";
 import { LogoMark } from '../../constants/styles/icons'
-import axios from "axios"
+import axios from "../../libs/utils/api";
 import { Link, useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useAuth } from "../../hooks/useAuth";
@@ -72,7 +72,7 @@ useEffect(() => {
     if (textareaRef.current) textareaRef.current.style.height = "auto";
 
     try {
-      const res = await axios.post("http://localhost:8080/assistant", {
+      const res = await axios.post("/assistant", {
         message: userMsg.content,
       });
 
