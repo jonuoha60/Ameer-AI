@@ -3,6 +3,7 @@ package firebase
 import (
 	"context"
 	"encoding/base64"
+	"fmt"
 
 	firebase "firebase.google.com/go/v4"
 	"google.golang.org/api/option"
@@ -13,6 +14,8 @@ func InitFirebase(credentialsBase64 string) (*firebase.App, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println(string(credsJSON[:200]))
 
 	opt := option.WithCredentialsJSON(credsJSON)
 

@@ -20,8 +20,13 @@ export const useGoogleSignIn = () => {
         token: idToken,
       });
 
-      loginUser(res.data.user);
-      navigate("/");
+      if(res.data) {
+         loginUser({
+            user: res.data.user,
+            accessToken: res.data.access_token,
+        }); 
+            navigate("/")
+    }
     } catch (err: any) {
       console.error(err);
       console.error(err.response?.data);

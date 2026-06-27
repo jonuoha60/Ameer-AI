@@ -79,7 +79,6 @@ export const Profile = () => {
           <div className="profile-avatar">
             {auth?.user.photo_url ? (
               <img src={auth.user.photo_url}
-                onError={(e) => console.error("Image failed", e)}
               />
             ) : (
               <div className="fallback">
