@@ -56,8 +56,8 @@ const Home: React.FC = () => {
     // if the backend returns an address, assign it here.
 
     
-  }catch(err) {
-    console.log(err)
+  } catch (err) {
+    console.error(err);
   }
 
 
@@ -94,7 +94,7 @@ function error(err: unknown | any) {
       }
     );
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -111,7 +111,7 @@ function error(err: unknown | any) {
         lng: data.results.longitude,
       };
     } catch (err) {
-      console.log("Error fetching coords:", err);
+      console.error("Error fetching coords:", err);
       return null;
     }
   };

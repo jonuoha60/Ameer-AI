@@ -55,19 +55,19 @@ export const Header = ({ home }: Props) => {
             className="profile-container"
             onClick={() => setOpen(!open)}
           >
-            {auth?.photo_url ? (
+            {auth?.user.photo_url ? (
               <img
-                src={auth?.photo_url}
+                src={auth?.user.photo_url}
                 className="profile-pic"
                 
               />
             ) : (
               <div className="profile-initial">
-                {auth?.username?.charAt(0).toUpperCase()}
+                {auth?.user.username?.charAt(0).toUpperCase()}
               </div>
             )}
 
-            <span className="profile-name">{auth?.username}</span>
+            <span className="profile-name">{auth?.user.username}</span>
           </div>
 
           {/* DROPDOWN */}

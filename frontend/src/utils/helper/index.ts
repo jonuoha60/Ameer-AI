@@ -32,13 +32,8 @@ export const bestValueTransport = (TransportList: TransportOption[], budget: num
 
   let bestOption: TransportOption | null = null;
 
-  console.log("Budget:", budget);
-  console.log("Transport List:", TransportList);
-
-
   for (const option of TransportList) {
     const price = Number(option.price.replace("$", "") || 0);
-    console.log(`Evaluating ${option.name} with price ${price}`); 
     if (isNaN(price)) {
       continue; 
     }

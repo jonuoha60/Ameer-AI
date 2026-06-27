@@ -32,8 +32,6 @@ export const Assistant = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  console.log("Trip Data:", tripData);
-
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -75,8 +73,6 @@ useEffect(() => {
       const res = await axios.post("/assistant", {
         message: userMsg.content,
       });
-
-      console.log(res.data.result.response)
 
       const data = res.data.result.response
       const reply =
@@ -149,7 +145,7 @@ useEffect(() => {
           {messages.length === 0 && (
             <div className="empty-state">
               <div className="empty-icon">🌍</div>
-              <h2 className="empty-title">Where to next {auth?.username} ?</h2>
+              <h2 className="empty-title">Where to next {auth?.user.username} ?</h2>
               <p className="empty-subtitle">
                 Ask me anything about travel — destinations, itineraries, tips, or hidden gems.
               </p>

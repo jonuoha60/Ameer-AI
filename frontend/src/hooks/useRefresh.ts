@@ -1,28 +1,23 @@
 import axios from "../libs/utils/api";
 
 const useRefreshToken = () => {
-   
 
-  const refreshToken = async() => {
-try {
-  const response = await axios.post(
-  "/refresh",
-  {},
-);
-  // setAuth((prev: Auth) => {
-  //   return {...prev, accessToken: response.data.accessToken}
-  // })
-  // setUser((prev: Auth) => {
-  //   return {...prev, accessToken: response.data.accessToken}
-  // })
-  return response.data
-} catch (err: unknown) {
-    console.log("Refresh token error:", err);
-  // console.error("Axios Error Code:", err); 
-  // console.error("Full Error Object:", err);
-}
+  const refreshToken = async () => {
+    try {
+      const response = await axios.post(
+        "/refresh",
+        {},
+        { withCredentials: true } // 🔥 REQUIRED
+      );
+
+      return response.data;
+    } catch (err) {
+      console.error("Refresh token error:", err);
+      return null; 
     }
-  return refreshToken
-}
+  };
+
+  return refreshToken;
+};
 
 export default useRefreshToken;

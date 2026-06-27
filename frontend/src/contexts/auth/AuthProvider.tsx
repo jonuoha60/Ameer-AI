@@ -13,26 +13,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const refreshToken = useRefreshToken()
 
     useEffect(() => {
-       const fetchData = async() => {
-        try{
-        const newAccessToken = await refreshToken()
-        console.log("New Access Token:", newAccessToken.user);
-        if(newAccessToken) {
-        const user = newAccessToken.user;
+    const fetchData = async () => {
+        try {
+        const res = await refreshToken();
 
-        if (user) {
-        loginUser(user);
+        if (!res?.user || !res?.access_token) {
+            setIsAuthenticated(false);
+            setAuth(null);
+            return;
         }
-        }
-        } catch(err) {
-            console.log(err)
+
+        loginUser({
+            user: res.user,
+            accessToken: res.access_token,
+            refreshToken: res.refresh_token,
+        });
+
+        } catch (err) {
+        console.error(err);
+        setAuth(null);
+        setIsAuthenticated(false);
         } finally {
-            setIsAuthLoading(false)
+        setIsAuthLoading(false);
         }
+    };
 
-       }
-       fetchData()
-    }, [])
+    fetchData();
+    }, []);
 
     const loginUser = (auth: Auth): void => {
         setAuth(auth);

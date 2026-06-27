@@ -23,7 +23,7 @@ export const useUber = () => {
       const price = Number(res.data.data.estimated_price).toFixed(2);
       setUberPrice(price);
     } catch (err) {
-      console.log("uber error:", err);
+      console.error("uber error:", err);
     }
   }, []);
 
@@ -45,7 +45,7 @@ export const useLocationService = () => {
         lng: res.data.results.longitude,
       };
     } catch (err) {
-      console.log("place error:", err);
+      console.error("place error:", err);
       return null;
     }
   }, []);
@@ -103,7 +103,7 @@ export const useDistance = () => {
         duration: formattedDuration,
       });
     } catch (err) {
-      console.log("distance error:", err);
+      console.error("distance error:", err);
     }
   }, []);
 
@@ -164,7 +164,7 @@ export const useCycling = () => {
       });
 
     } catch (err) {
-      console.log("distance error:", err);
+      console.error("distance error:", err);
     }
   },
   []
@@ -247,7 +247,7 @@ export const useTransit = () => {
       });
 
     } catch (err) {
-      console.log("transit error:", err);
+      console.error("transit error:", err);
     }
   }, []);
 

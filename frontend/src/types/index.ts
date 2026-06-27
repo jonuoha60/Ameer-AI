@@ -56,25 +56,20 @@ export interface TransportProps {
   bikeCost: string | undefined;
 }
 
+
+
 export interface User {
-    _id: string;
-    email: string;
-    username: string;
-    photo_url: string;
-    createdAt: string;
-    login?: () => void;
-    logout?: () => void;
-    
-}
-
-
-export interface Auth {
-  accessToken?: string;
   id: string;
   username: string;
   email: string;
   bio?: string;
   photo_url?: string;
+}
+
+export interface Auth {
+  user: User;
+  accessToken: string;
+  refreshToken?: string;
 }
 
 

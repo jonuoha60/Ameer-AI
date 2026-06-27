@@ -15,11 +15,9 @@ export const Profile = () => {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  console.log("AUTH: ", auth)
-
   useEffect(() => {
-  if (auth?.bio) {
-    setBio(auth.bio);
+  if (auth?.user.bio) {
+    setBio(auth.user.bio);
   }
 }, [auth]);
   
@@ -79,21 +77,20 @@ export const Profile = () => {
         {/* HERO */}
         <div className="profile-hero">
           <div className="profile-avatar">
-            {auth?.photo_url ? (
-              <img src={auth.photo_url}
-                onLoad={() => console.log("Image loaded")}
-  onError={(e) => console.log("Image failed", e)}
+            {auth?.user.photo_url ? (
+              <img src={auth.user.photo_url}
+                onError={(e) => console.error("Image failed", e)}
               />
             ) : (
               <div className="fallback">
-                {auth?.username?.charAt(0).toUpperCase()}
+                {auth?.user.username?.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
 
           <div className="profile-info">
-            <h2>{auth?.username}</h2>
-            <p>{auth?.email}</p>
+            <h2>{auth?.user.username}</h2>
+            <p>{auth?.user.email}</p>
 
             <div className="profile-bio">
               <input
@@ -128,8 +125,6 @@ export const Profile = () => {
       className="post-experience-btn"
       onClick={() => {
         navigate("/profile/create")
-
-        console.log("Create Experience");
       }}
     >
       Share Your First Travel Experience
