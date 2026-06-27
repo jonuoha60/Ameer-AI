@@ -5,6 +5,7 @@ import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
 import { Header } from "./Header";
 import axios from "../../libs/utils/api";
 import { Link } from "react-router-dom";
+import { useGoogleSignIn } from "../../libs/actions/GoogleLogin";
 
 interface FocusedInputs {
   [key: string]: boolean;
@@ -22,6 +23,7 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const { handleGoogleSignIn } = useGoogleSignIn();
 
   const [loading, setLoading] = useState(false);
 
@@ -128,15 +130,15 @@ export const Signup = () => {
             <p className="auth-subtitle">Get started — it's free forever</p>
           </div>
 
-          <div className="auth-oauth-row">
+      <div className="auth-oauth-row">
             {[
               { id: "google", label: "Google", icon: <GoogleIcon /> },
-              { id: "github", label: "GitHub", icon: <GithubIcon /> },
             ].map(({ id, label, icon }) => (
               <button
                 key={id}
                 type="button"
                 className="auth-oauth-btn"
+                onClick={handleGoogleSignIn}
               >
                 {icon}
                 <span>{label}</span>

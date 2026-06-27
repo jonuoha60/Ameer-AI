@@ -8,6 +8,7 @@ import { Assistant } from './components/pages/Assistant'
 import { Profile } from './components/pages/Profile'
 import { Explore } from './components/pages/Explore'
 import { Experience } from './components/pages/Experience'
+import About from './components/pages/About'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Route element={<Signup />} path='/signup' />
       <Route element={<Profile />} path='/profile' />
       <Route element={<Explore />} path='/explore' />
+      <Route element={<About />} path='/about' />
       <Route element={<Experience />} path='/profile/create' />
     </Routes>
     </BrowserRouter>

@@ -61,7 +61,7 @@ export const Header = ({ home }: Props) => {
           <span onClick={() => navigate("/best-route/results")}>
             Budget
           </span>
-          <span>About</span>
+          <span onClick={() => navigate("/about")}>About</span>
         </div>
       )}
 

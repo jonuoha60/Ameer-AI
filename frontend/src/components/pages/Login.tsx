@@ -9,6 +9,7 @@ import axios from "../../libs/utils/api/index";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../firebase/client";
+import { useGoogleSignIn } from "../../libs/actions/GoogleLogin";
 
 interface FocusedInputs {
   [key: string]: boolean;
@@ -22,6 +23,7 @@ export const Login = () => {
     general?: string;
   }>({});
   const { loginUser } = useAuth();
+  const { handleGoogleSignIn } = useGoogleSignIn();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -105,25 +107,6 @@ export const Login = () => {
   };
 
 
-const handleGoogleSignIn = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-
-    const user = result.user;
-    const idToken = await user.getIdToken();
-
-    const res = await axios.post("/user/google/login", {
-      token: idToken,
-    });
-
-    loginUser(res.data.user);
-    navigate("/");
-  } catch(err: any) {
-    console.error(err);
-    console.error(err.response?.data);
-  }
-};
 
   return (
     <>
@@ -141,7 +124,6 @@ const handleGoogleSignIn = async () => {
           <div className="auth-oauth-row">
             {[
               { id: "google", label: "Google", icon: <GoogleIcon /> },
-              { id: "github", label: "GitHub", icon: <GithubIcon /> },
             ].map(({ id, label, icon }) => (
               <button
                 key={id}

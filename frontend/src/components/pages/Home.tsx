@@ -332,7 +332,7 @@ function error(err: unknown | any) {
 <div className="about-section">
   <div className="about-content">
     <div className="about-text">
-        <div className="section-title">Ameer AI</div>
+        <div className="section-title">Why us?</div>
 
       <p>
         Ameer AI is a travel planner agent built to help travellers all over the world navigate safely.
@@ -357,8 +357,60 @@ function error(err: unknown | any) {
     </div>
 
     <div className="about-image">
-      <img src={Landing} alt="About me" />
-    </div>
+  <svg width="100%" viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: 12 }}>
+    <defs>
+      <style>{`
+        .pulse-ring { animation: pulse 2.5s ease-out infinite; opacity: 0; }
+        .pulse-ring-2 { animation-delay: 0.8s; }
+        .pulse-ring-3 { animation-delay: 1.6s; }
+        @keyframes pulse { 0% { r: 4; opacity: 0.7; } 100% { r: 18; opacity: 0; } }
+        .route { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 2s ease forwards; }
+        .route-2 { animation-delay: 0.4s; }
+        .route-3 { animation-delay: 0.8s; }
+        .route-4 { animation-delay: 1.2s; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        .pin-dot { animation: popin 0.3s ease forwards; transform-origin: center; opacity: 0; }
+        .pin-1 { animation-delay: 0.2s; } .pin-2 { animation-delay: 0.6s; }
+        .pin-3 { animation-delay: 1.0s; } .pin-4 { animation-delay: 1.4s; }
+        .pin-5 { animation-delay: 1.8s; }
+        @keyframes popin { 0%{transform:scale(0);opacity:0} 70%{transform:scale(1.3);opacity:1} 100%{transform:scale(1);opacity:1} }
+      `}</style>
+      <marker id="mapArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </marker>
+    </defs>
+
+    {/* Continents */}
+    <path d="M60 80 L140 70 L170 85 L180 110 L175 140 L165 160 L155 175 L140 190 L125 200 L110 210 L95 220 L80 215 L70 200 L60 185 L55 165 L50 145 L48 120 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+    <path d="M130 225 L165 220 L178 235 L182 260 L178 285 L170 305 L155 318 L140 322 L128 315 L118 295 L115 270 L118 248 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+    <path d="M290 60 L340 55 L360 65 L365 80 L358 95 L345 105 L330 108 L318 112 L305 108 L292 100 L285 85 L287 70 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+    <path d="M295 125 L340 118 L358 130 L365 155 L362 185 L352 210 L340 230 L325 240 L310 238 L298 225 L290 205 L286 178 L287 152 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+    <path d="M370 55 L480 45 L530 60 L550 80 L545 105 L530 120 L510 128 L490 130 L465 125 L445 115 L420 118 L400 112 L385 100 L372 85 L368 68 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+    <path d="M490 230 L545 222 L565 235 L568 260 L560 278 L545 288 L525 290 L508 282 L496 265 L490 248 Z" fill="#D1FAE5" stroke="#A7F3D0" strokeWidth="0.5"/>
+
+    {/* Routes */}
+    <path className="route" d="M145 140 Q220 90 310 78" fill="none" stroke="#0EA5E9" strokeWidth="1.5" strokeDasharray="6 4" markerEnd="url(#mapArrow)"/>
+    <path className="route route-2" d="M322 82 Q380 75 430 92" fill="none" stroke="#0EA5E9" strokeWidth="1.5" strokeDasharray="6 4" markerEnd="url(#mapArrow)"/>
+    <path className="route route-3" d="M438 94 Q470 80 510 90" fill="none" stroke="#0EA5E9" strokeWidth="1.5" strokeDasharray="6 4" markerEnd="url(#mapArrow)"/>
+    <path className="route route-4" d="M518 97 Q530 160 528 248" fill="none" stroke="#0EA5E9" strokeWidth="1.5" strokeDasharray="6 4" markerEnd="url(#mapArrow)"/>
+
+    {/* Pins */}
+    {[
+      { cx: 145, cy: 142, label: 'New York', ly: 162 },
+      { cx: 322, cy: 80,  label: 'London',   ly: 68  },
+      { cx: 438, cy: 96,  label: 'Dubai',    ly: 114 },
+      { cx: 518, cy: 92,  label: 'Tokyo',    ly: 108 },
+      { cx: 528, cy: 252, label: 'Sydney',   ly: 268 },
+    ].map(({ cx, cy, label, ly }, i) => (
+      <g key={label} className={`pin-dot pin-${i + 1}`}>
+        <circle cx={cx} cy={cy} r={5} fill="#0EA5E9"/>
+        <circle cx={cx} cy={cy} r={8} fill="none" stroke="#0EA5E9" strokeWidth="1.2" className="pulse-ring"/>
+        <circle cx={cx} cy={cy} r={8} fill="none" stroke="#0EA5E9" strokeWidth="1.2" className="pulse-ring pulse-ring-2"/>
+        <text x={cx} y={ly} textAnchor="middle" fontSize={10} fontFamily="Inter, sans-serif" fill="#1E3A5F" fontWeight="500">{label}</text>
+      </g>
+    ))}
+  </svg>
+</div>
   </div>
 </div>
     </div>

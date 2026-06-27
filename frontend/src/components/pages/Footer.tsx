@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../../constants/styles/Footer.css";
 import { Icons } from "../../constants/styles/icons";
 
@@ -16,17 +17,9 @@ export const Footer = () => {
           </p>
 
           <div className="footer-socials">
-            <a href="/">
-              <Icons.Globe />
-            </a>
-
-            <a href="/">
-              <Icons.Users />
-            </a>
-
-            <a href="/">
-              <Icons.Map />
-            </a>
+            <Link to="/"><Icons.Globe /></Link>
+            <Link to="/"><Icons.Users /></Link>
+            <Link to="/"><Icons.Map /></Link>
           </div>
         </div>
 
@@ -34,30 +27,29 @@ export const Footer = () => {
         <div className="footer-links">
           <h4>Company</h4>
 
-          <a href="/">About</a>
-          <a href="/">Careers</a>
-          <a href="/">Blog</a>
-          <a href="/">Press</a>
+          <Link to="/about">About</Link>
+          <Link to="/blog">Blog</Link>
+          <Link to="/press">Press</Link>
         </div>
 
         {/* PRODUCTS */}
         <div className="footer-links">
           <h4>Products</h4>
 
-          <a href="/">Route Comparison</a>
-          <a href="/">Budget Tracker</a>
-          <a href="/">AI Planner</a>
-          <a href="/">Trip History</a>
+          <Link to="/route-comparison">Route Comparison</Link>
+          <Link to="/budget-tracker">Budget Tracker</Link>
+          <Link to="/ameer">AI Planner</Link>
+          <Link to="/profile">Trip History</Link>
         </div>
 
         {/* SUPPORT */}
         <div className="footer-links">
           <h4>Support</h4>
 
-          <a href="/">Help Center</a>
-          <a href="/">Contact</a>
-          <a href="/">Privacy Policy</a>
-          <a href="/">Terms of Service</a>
+          <Link to="/help-center">Help Center</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/privacy-policy">Privacy Policy</Link>
+          <Link to="/terms-of-service">Terms of Service</Link>
         </div>
       </div>
 
@@ -65,9 +57,9 @@ export const Footer = () => {
         <p>© 2026 Ameer AI. All rights reserved.</p>
 
         <div className="footer-bottom-links">
-          <a href="/">Privacy</a>
-          <a href="/">Terms</a>
-          <a href="/">Accessibility</a>
+          <Link to="/privacy-policy">Privacy</Link>
+          <Link to="/terms-of-service">Terms</Link>
+          <Link to="/accessibility">Accessibility</Link>
         </div>
       </div>
     </footer>
