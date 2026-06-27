@@ -3,6 +3,7 @@ package userList
 import (
 	"go-modules/internal/models"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,13 +41,15 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		return
 	}
 
+	isProd := os.Getenv("GIN_MODE") == "release"
+
 	c.SetCookie(
 		"refresh_token",
 		created.RefreshToken,
 		60*60*24*7,
 		"/",
 		"",
-		false,
+		isProd,
 		true,
 	)
 
@@ -56,7 +59,7 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		60*15,
 		"/",
 		"",
-		false,
+		isProd,
 		true,
 	)
 
@@ -87,13 +90,15 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		return
 	}
 
+	isProd := os.Getenv("GIN_MODE") == "release"
+
 	c.SetCookie(
 		"refresh_token",
 		created.RefreshToken,
 		60*60*24*7,
 		"/",
 		"",
-		false,
+		isProd,
 		true,
 	)
 
@@ -103,7 +108,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		60*15,
 		"/",
 		"",
-		false,
+		isProd,
 		true,
 	)
 
@@ -128,14 +133,15 @@ func (h *Handler) GetUser(c *gin.Context) {
 		return
 	}
 
+	isProd := os.Getenv("GIN_MODE") == "release"
+
 	http.SetCookie(c.Writer, &http.Cookie{
 		Name:     "refresh_token",
 		Value:    user.RefreshToken,
 		Path:     "/",
-		Domain:   "localhost",
 		MaxAge:   60 * 60 * 24 * 7,
 		HttpOnly: true,
-		Secure:   false,
+		Secure:   isProd,
 		SameSite: http.SameSiteLaxMode,
 	})
 
@@ -143,10 +149,9 @@ func (h *Handler) GetUser(c *gin.Context) {
 		Name:     "access_token",
 		Value:    user.AccessToken,
 		Path:     "/",
-		Domain:   "localhost",
 		MaxAge:   60 * 15,
 		HttpOnly: true,
-		Secure:   false,
+		Secure:   isProd,
 		SameSite: http.SameSiteLaxMode,
 	})
 
