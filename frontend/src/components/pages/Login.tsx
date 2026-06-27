@@ -6,7 +6,7 @@ import "../../constants/styles/Login.css";
 import { Header } from "./Header";
 import { useAuth } from "../../hooks/useAuth";
 import axios from "../../libs/utils/api/index";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../firebase/client";
 
@@ -76,8 +76,6 @@ export const Login = () => {
     );
 
       const data = res.data;
-
-      console.log(data.user)
 
       if(res.data) {
          loginUser(data.user); 
@@ -217,9 +215,9 @@ const handleGoogleSignIn = async () => {
 
           <p className="auth-toggle">
             Don't have an account?{" "}
-            <a href="/signup" className="auth-toggle-btn">
-              Sign up
-            </a>
+           <Link to="/signup" className="auth-toggle-btn">
+  Sign up
+</Link>
           </p>
         </div>
       </div>

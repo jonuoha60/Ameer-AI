@@ -4,6 +4,7 @@ import { inputStyle, dividerStyle } from "../../constants/styles/icons/index";
 import { GoogleIcon, GithubIcon } from "../../constants/styles/icons/index";
 import { Header } from "./Header";
 import axios from "../../libs/utils/api";
+import { Link } from "react-router-dom";
 
 interface FocusedInputs {
   [key: string]: boolean;
@@ -215,9 +216,9 @@ export const Signup = () => {
 
           <p className="auth-toggle">
             Already have an account?{" "}
-            <a href="/login" className="auth-toggle-btn">
-              Sign in
-            </a>
+                       <Link to="/login" className="auth-toggle-btn">
+  Sign in
+</Link>
           </p>
         </div>
       </div>
