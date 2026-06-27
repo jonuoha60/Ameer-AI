@@ -7,7 +7,7 @@ const useRefreshToken = () => {
       const response = await axios.post(
         "/refresh",
         {},
-        { withCredentials: true } // 🔥 REQUIRED
+        { withCredentials: true } 
       );
 
       return response.data;
