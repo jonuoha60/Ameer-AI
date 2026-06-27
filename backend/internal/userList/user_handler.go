@@ -41,15 +41,13 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		return
 	}
 
-	isProd := os.Getenv("GIN_MODE") == "release"
-
 	c.SetCookie(
 		"refresh_token",
 		created.RefreshToken,
 		60*60*24*7,
 		"/",
 		"",
-		isProd,
+		true,
 		true,
 	)
 
@@ -59,7 +57,7 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		60*15,
 		"/",
 		"",
-		isProd,
+		true,
 		true,
 	)
 
@@ -133,15 +131,13 @@ func (h *Handler) GetUser(c *gin.Context) {
 		return
 	}
 
-	isProd := os.Getenv("GIN_MODE") == "release"
-
 	http.SetCookie(c.Writer, &http.Cookie{
 		Name:     "refresh_token",
 		Value:    user.RefreshToken,
 		Path:     "/",
 		MaxAge:   60 * 60 * 24 * 7,
 		HttpOnly: true,
-		Secure:   isProd,
+		Secure:   true,
 		SameSite: http.SameSiteLaxMode,
 	})
 
@@ -151,7 +147,7 @@ func (h *Handler) GetUser(c *gin.Context) {
 		Path:     "/",
 		MaxAge:   60 * 15,
 		HttpOnly: true,
-		Secure:   isProd,
+		Secure:   true,
 		SameSite: http.SameSiteLaxMode,
 	})
 
