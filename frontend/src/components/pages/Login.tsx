@@ -75,7 +75,6 @@ export const Login = () => {
       }
     );
 
-      const data = res.data;
 
       if(res.data) {
          loginUser({
