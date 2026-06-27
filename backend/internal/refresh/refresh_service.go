@@ -57,17 +57,7 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 		return RefreshResponse{}, err
 	}
 
-	err = s.repo.DeleteRefreshToken(ctx, oldToken)
-	if err != nil {
-		return RefreshResponse{}, fmt.Errorf("failed to rotate token")
-	}
-
-	user, err := s.repo.GetUserByID(ctx, userID)
-	if err != nil {
-		return RefreshResponse{}, fmt.Errorf("failed to retrieve user information")
-	}
-
-	_, err = s.repo.SaveRefreshToken(ctx, models.RefreshToken{
+	err = s.repo.RotateRefreshToken(ctx, oldToken, models.RefreshToken{
 		UserID:    existingToken.UserID,
 		Token:     newRefresh,
 		Role:      role,
@@ -76,13 +66,17 @@ func (s *Service) Create(ctx context.Context, oldToken string) (RefreshResponse,
 	})
 
 	if err != nil {
-		return RefreshResponse{}, err
+		return RefreshResponse{}, fmt.Errorf("failed to rotate token: %w", err)
+	}
+
+	user, err := s.repo.GetUserByID(ctx, userID)
+	if err != nil {
+		return RefreshResponse{}, fmt.Errorf("failed to retrieve user information")
 	}
 
 	return RefreshResponse{
 		AccessToken:  newAccess,
 		RefreshToken: newRefresh,
-
-		User: &user,
+		User:         &user,
 	}, nil
 }

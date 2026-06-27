@@ -21,9 +21,30 @@ func NewRepo(db *mongo.Database) *Repo {
 	}
 }
 
-func (r *Repo) DeleteRefreshToken(ctx context.Context, token string) error {
-	_, err := r.coll.DeleteOne(ctx, bson.M{"token": token})
-	return err
+func (r *Repo) RotateRefreshToken(ctx context.Context, oldToken string, newToken models.RefreshToken) error {
+
+	filter := bson.M{"token": oldToken}
+
+	update := bson.M{
+		"$set": bson.M{
+			"token":     newToken.Token,
+			"userID":    newToken.UserID,
+			"role":      newToken.Role,
+			"expiresAt": newToken.ExpiresAt,
+			"createdAt": newToken.CreatedAt,
+		},
+	}
+
+	res, err := r.coll.UpdateOne(ctx, filter, update)
+	if err != nil {
+		return err
+	}
+
+	if res.MatchedCount == 0 {
+		return fmt.Errorf("refresh token already used or invalid")
+	}
+
+	return nil
 }
 
 func (r *Repo) ValidateRefreshToken(ctx context.Context, token string) (models.RefreshToken, error) {
