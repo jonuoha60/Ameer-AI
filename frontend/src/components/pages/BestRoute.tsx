@@ -89,7 +89,7 @@ useEffect(() => {
     if (!distanceData) return;
     if (!selectedCard) return;
 
-    navigate("/ameer", {
+    navigate("/ask-ameer", {
       state: {
         from,
         to,

@@ -2,7 +2,7 @@
   display: flex;
   height: 100vh;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .top-nav {
@@ -10,29 +10,23 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-
   width: 100%;
 }
 
-.ask-ameer {
-    color: #64748b;
-}
+.ask-ameer { color: #64748b; }
 
 .budget-refresh-btn {
   display: flex;
   align-items: center;
   gap: 6px;
-
   background: transparent;
   border: 1px solid #e2e8f0;
   padding: 16px 10px;
   border-radius: 8px;
   text-align: center;
-
   font-size: 12px;
   color: #475569;
   cursor: pointer;
-
   transition: 0.2s;
 }
 
@@ -51,13 +45,11 @@
   flex-direction: column;
 }
 
-
 .map-panel {
   width: 60%;
   height: 100%;
-  flex-shrink: 0; /* ✅ prevents shrinking */
+  flex-shrink: 0;
 }
-
 
 .route-locations {
   background: #f4f4f4;
@@ -75,7 +67,6 @@
   gap: 10px;
 }
 
-
 .loc-icon {
   background: #fff;
   padding: 8px;
@@ -85,10 +76,7 @@
   justify-content: center;
 }
 
-.loc-label {
-  font-size: 12px;
-  color: #777;
-}
+.loc-label { font-size: 12px; color: #777; }
 
 .loc-input {
   border: none;
@@ -96,19 +84,17 @@
   background: transparent;
   font-weight: 600;
   font-size: 14px;
-  width: 100%; 
+  width: 100%;
 }
 
 .input-field-route {
-  width: 320%;
+  width: 100%;
   border: none;
   outline: none;
   background: transparent;
   color: #0f172a;
   font-size: 14px;
 }
-
-
 
 .budget-box {
   background: #f7f7f7;
@@ -117,17 +103,13 @@
   margin-bottom: 20px;
 }
 
-.budget-header {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 10px;
-}
+.budget-header { font-size: 13px; color: #666; margin-bottom: 10px; }
 
 .budget-controls {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .budget-controls button {
@@ -140,9 +122,7 @@
   font-size: 18px;
 }
 
-.budget-controls button:hover {
-  background: #ccc; /* ✅ better UX */
-}
+.budget-controls button:hover { background: #ccc; }
 
 .budget-input {
   border: none;
@@ -153,7 +133,6 @@
   font-size: 16px;
   width: 60px;
 }
-
 
 .transport-list {
   display: flex;
@@ -173,59 +152,20 @@
   transition: 0.2s;
 }
 
-.transport-card:hover {
-  transform: translateY(-2px);
-}
+.transport-card:hover { transform: translateY(-2px); }
 
+.tc-left { display: flex; gap: 10px; align-items: center; }
 
+.tc-icon { background: #fff; padding: 8px; border-radius: 10px; }
 
-.tc-left {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+.tc-name { font-weight: 600; }
+.tc-sub { font-size: 12px; color: #777; }
+.tc-right { text-align: right; }
+.tc-price { font-weight: bold; }
+.tc-time { font-size: 12px; color: #777; }
 
-.tc-icon {
-  background: #fff;
-  padding: 8px;
-  border-radius: 10px;
-}
-
-.tc-name {
-  font-weight: 600;
-}
-
-.tc-sub {
-  font-size: 12px;
-  color: #777;
-}
-
-.tc-right {
-  text-align: right;
-}
-
-.tc-price {
-  font-weight: bold;
-}
-
-.tc-time {
-  font-size: 12px;
-  color: #777;
-}
-
-.best-badge {
-  font-size: 11px;
-  margin-top: 4px;
-  color: #4caf50;
-}
-
-
-
-.over-budget {
-  font-size: 11px;
-  color: red;
-  margin-top: 4px;
-}
+.best-badge { font-size: 11px; margin-top: 4px; color: #4caf50; }
+.over-budget { font-size: 11px; color: red; margin-top: 4px; }
 
 .rides-header {
   font-size: 14px;
@@ -245,16 +185,11 @@
   font-size: 13px;
   color: #666;
   display: flex;
-
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.distance-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.distance-content { display: flex; align-items: center; gap: 10px; }
 
 .distance-icon {
   background: #fff;
@@ -286,7 +221,6 @@
   transition: all 0.2s ease;
 }
 
-
 .distance-row {
   display: flex;
   align-items: center;
@@ -294,25 +228,20 @@
   gap: 12px;
   width: 100%;
 }
+
 .quick-time {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-
   padding: 14px;
   border-radius: 12px;
-
   background: transparent;
-
   border: 1px solid #e5e7eb;
-
   margin-bottom: 15px;
   transition: all 0.2s ease;
 }
 
-.quick-time:hover {
-  border-color: #cbd5e1;
-}
+.quick-time:hover { border-color: #cbd5e1; }
 
 .quick-time-label {
   font-size: 13px;
@@ -322,40 +251,22 @@
   line-height: 1.3;
 }
 
-/* select input styling consistent with loc-input */
 .quick-time-input {
   width: 100%;
-
   border: none;
   outline: none;
   background: transparent;
-
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
 
-/* optional: focus ring like other inputs */
-.quick-time-input:focus {
-  outline: none;
-}
+.quick-time-input:focus { outline: none; }
 
-.ask-ameer-container {
-  display: flex;
-  
-  margin: 10px 0;
-}
+.ask-ameer-container { display: flex; margin: 10px 0; }
 
+.budget-btn { display: flex; gap: 5px; margin-top: 16px; align-items: center; }
 
-
-.budget-btn {
-  display: flex;
-  gap: 5px;
-  margin-top: 16px;
-  align-items: center;
-}
-
-/* SAVE TRIP */
 .save-trip-btn {
   background: #111827;
   color: #fff;
@@ -369,12 +280,8 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.save-trip-btn:hover {
-  background: #1f2937;
-  transform: translateY(-1px);
-}
+.save-trip-btn:hover { background: #1f2937; transform: translateY(-1px); }
 
-/* ASK AMEER */
 .ask-ameer-btn {
   background: linear-gradient(135deg, #2563eb, #1e40af);
   color: #fff;
@@ -393,27 +300,17 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-/* optional: active click effect */
-.save-trip-btn:active,
-.ask-ameer-btn:active {
-  transform: scale(0.97);
-}
-
+.save-trip-btn:active, .ask-ameer-btn:active { transform: scale(0.97); }
 
 .route-top {
   display: flex;
   align-items: center;
   justify-content: center;
-
   position: relative;
   margin: 10px 0;
 }
 
-.route-divider-distance {
-  height: 1px;
-  background: #ddd;
-  margin: 4px 0;
-}
+.route-divider-distance { height: 1px; background: #ddd; margin: 4px 0; }
 
 .route-divider {
   position: absolute;
@@ -425,24 +322,18 @@
 .switch-btn {
   position: relative;
   z-index: 2;
-
   width: 36px;
   height: 36px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 999px;
   border: 1px solid #e5e5e5;
-
   background: #fff;
   cursor: pointer;
-
   transition: all 0.2s ease;
 }
 
-/* icon */
 .switch-btn svg {
   width: 16px;
   height: 16px;
@@ -450,12 +341,62 @@
   transition: transform 0.2s ease;
 }
 
-/* hover */
-.switch-btn:hover {
-  background: #111;
-  border-color: #111;
+.switch-btn:hover { background: #111; border-color: #111; }
+.switch-btn:hover svg { color: #fff; }
+
+/* ==========================
+   TABLETS (1024px and below)
+========================== */
+@media (max-width: 1024px) {
+  .route-panel { width: 45%; padding: 16px; }
+  .map-panel { width: 55%; }
 }
 
-.switch-btn:hover svg {
-  color: #fff;
+/* ==========================
+   MOBILE (768px and below)
+========================== */
+@media (max-width: 768px) {
+  .best-route-container {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .route-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    order: 2;
+  }
+
+  .map-panel {
+    width: 100%;
+    height: 320px;
+    order: 1;
+  }
+
+  .top-nav { margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+
+  .transport-card { flex-wrap: wrap; gap: 8px; }
+  .tc-right { text-align: left; }
+}
+
+/* ==========================
+   SMALL PHONES (480px and below)
+========================== */
+@media (max-width: 480px) {
+  .route-panel { padding: 14px; }
+  .map-panel { height: 240px; }
+
+  .budget-refresh-btn { padding: 10px 8px; font-size: 11px; }
+
+  .save-trip-btn, .ask-ameer-btn {
+    padding: 11px 14px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .budget-btn { flex-direction: column; align-items: stretch; }
+
+  .quick-time { padding: 10px; }
 }

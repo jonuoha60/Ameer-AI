@@ -4,6 +4,7 @@ import { LogoMark } from "../../constants/styles/icons";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import axios from "../../libs/utils/api/index";
+import { Menu, X } from "lucide-react";
 
 interface Props {
   home: boolean;
@@ -12,7 +13,7 @@ interface Props {
 export const Header = ({ home }: Props) => {
   const navigate = useNavigate();
   const { auth, isAuthenticated, logoutUser } = useAuth();
-
+  const [mobileMenu, setMobileMenu] = useState(false);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -47,36 +48,49 @@ export const Header = ({ home }: Props) => {
   }
 
   return (
-    <nav className="navbar">
-      <Link className="link" to="/">
-        <div className="logo">
-          <LogoMark /> Ameer AI
-        </div>
-      </Link>
+  <nav className="navbar">
 
-      {home && (
-        <div className="nav-links">
-          <span onClick={() => navigate("/explore")}>Explore</span>
-          <span onClick={() => navigate("/ameer")}>Ask Ameer</span>
-          <span onClick={() => navigate("/best-route/results")}>
-            Budget
-          </span>
-          <span onClick={() => navigate("/about")}>About</span>
-        </div>
-      )}
+    <Link className="link" to="/">
+      <div className="logo">
+        <LogoMark /> Ameer AI
+      </div>
+    </Link>
+
+
+    {home && (
+      <div className={`nav-links ${mobileMenu ? "active" : ""}`}>
+        <span onClick={() => navigate("/explore")}>
+          Explore
+        </span>
+
+        <span onClick={() => navigate("/ask-ameer")}>
+          Ask Ameer
+        </span>
+
+        <span onClick={() => navigate("/best-route/results")}>
+          Budget
+        </span>
+
+        <span onClick={() => navigate("/about")}>
+          About
+        </span>
+      </div>
+    )}
+
+
+    <div className="nav-actions">
 
       {isAuthenticated ? (
         <div className="profile-wrapper" ref={dropdownRef}>
-          {/* PROFILE BUTTON */}
+
           <div
             className="profile-container"
             onClick={() => setOpen(!open)}
           >
             {auth?.user.photo_url ? (
               <img
-                src={auth?.user.photo_url}
+                src={auth.user.photo_url}
                 className="profile-pic"
-                
               />
             ) : (
               <div className="profile-initial">
@@ -84,12 +98,16 @@ export const Header = ({ home }: Props) => {
               </div>
             )}
 
-            <span className="profile-name">{auth?.user.username}</span>
+            <span className="profile-name">
+              {auth?.user.username}
+            </span>
+
           </div>
 
-          {/* DROPDOWN */}
+
           {open && (
             <div className="profile-dropdown">
+
               <div
                 className="dropdown-item"
                 onClick={() => {
@@ -100,23 +118,40 @@ export const Header = ({ home }: Props) => {
                 Profile
               </div>
 
+
               <div
                 className="dropdown-item danger"
                 onClick={logout}
               >
                 Sign out
               </div>
+
             </div>
           )}
+
         </div>
+
       ) : (
+
         <button
           onClick={() => navigate("/login")}
           className="nav-btn"
         >
           Sign in
         </button>
+
       )}
-    </nav>
-  );
+
+
+      <button
+        className="menu-btn"
+        onClick={() => setMobileMenu(!mobileMenu)}
+      >
+        {mobileMenu ? <X size={24}/> : <Menu size={24}/>}
+      </button>
+
+    </div>
+
+  </nav>
+);
 };
