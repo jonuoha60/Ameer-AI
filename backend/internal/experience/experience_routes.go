@@ -21,6 +21,6 @@ func RegisterRoutes(r *gin.Engine, db *mongo.Database, jwtAccess string) {
 	auth.Use(middleware.AuthMiddleware(jwtAccess))
 	{
 		auth.POST("/create", h.CreateUserExperience)
-		auth.POST("/get", h.GetUserExperience)
+		auth.GET("/get", h.GetUserExperience)
 	}
 }
