@@ -139,7 +139,7 @@ function error(err: unknown | any) {
     {/* HERO */}
     <div className="hero">
       <div className="hero-left">
-        <h2>Travel Smarter not Harder.</h2>
+        <h2><span className="highlight">Travel</span> Smarter not Harder.</h2>
         <p>
           Compare routes, track your budget, and get real-time travel advice — no matter where you're headed.
         </p>

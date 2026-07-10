@@ -14,6 +14,7 @@ Make sure you have the following installed on your machine:
 
 - **Git**
 - **Node.js**
+- **Go**
 - **npm** 
 
 ---

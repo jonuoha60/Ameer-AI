@@ -1,6 +1,8 @@
 package userList
 
 import (
+	"go-modules/internal/middleware"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 )
@@ -14,6 +16,13 @@ func RegisterRoutes(r *gin.Engine, db *mongo.Database, jwtRefresh string, jwtAcc
 		userGroup.POST("/google/login", h.GoogleCreateUser)
 		userGroup.POST("/signup", h.CreateUser)
 		userGroup.POST("/login", h.GetUser)
-		userGroup.POST("/logout", h.LogoutUser)
+		userGroup.GET("/:id", h.GetUsers)
+
+		auth := userGroup.Group("/")
+		auth.Use(middleware.AuthMiddleware(jwtAccess))
+		{
+			auth.POST("/follow/:followingId", h.FollowUser)
+			auth.POST("/logout", h.LogoutUser)
+		}
 	}
 }

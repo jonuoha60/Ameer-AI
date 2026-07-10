@@ -28,8 +28,7 @@ export const Footer = () => {
           <h4>Company</h4>
 
           <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/press">Press</Link>
+
         </div>
 
         {/* PRODUCTS */}
@@ -38,7 +37,7 @@ export const Footer = () => {
 
           <Link to="/route-comparison">Route Comparison</Link>
           <Link to="/budget-tracker">Budget Tracker</Link>
-          <Link to="/ameer">AI Planner</Link>
+          <Link to="/ask-ameer">AI Planner</Link>
           <Link to="/profile">Trip History</Link>
         </div>
 

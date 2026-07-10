@@ -2,11 +2,13 @@ package userList
 
 import (
 	"context"
+	"fmt"
 	"go-modules/internal/auth"
 	"go-modules/internal/models"
 	"go-modules/internal/refresh"
 	"time"
 
+	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
@@ -128,4 +130,31 @@ func (s *Service) GoogleSignup(ctx context.Context, token string) (AuthResponse,
 		RefreshToken: rt,
 		AccessToken:  accessToken,
 	}, nil
+}
+
+func (s *Service) GetUserByID(ctx context.Context, userID bson.ObjectID) (models.User, error) {
+	user, err := s.repo.GetUserID(ctx, userID)
+	if err != nil {
+		return models.User{}, err
+	}
+	return user, nil
+}
+
+func (s *Service) CreateUserFollowing(ctx context.Context, userID string, followingIDHex string) (models.User, error) {
+	id, err := bson.ObjectIDFromHex(userID)
+	if err != nil {
+		return models.User{}, fmt.Errorf("invalid user id: %w", err)
+	}
+
+	followingID, err := bson.ObjectIDFromHex(followingIDHex)
+	if err != nil {
+		return models.User{}, fmt.Errorf("invalid following id: %w", err)
+	}
+
+	user, err := s.repo.CreateFollowing(ctx, id, followingID)
+	if err != nil {
+		return models.User{}, err
+	}
+
+	return user, nil
 }

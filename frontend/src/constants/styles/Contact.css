@@ -1,0 +1,210 @@
+.contact-page {
+  display: flex;
+  min-height: calc(100vh - 72px);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* LEFT: INFO PANEL */
+.contact-info {
+  flex: 1;
+  min-width: 0;
+  padding: 72px 48px 72px 0;
+  position: relative;
+}
+
+.contact-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0EA5E9;
+  margin-bottom: 18px;
+}
+
+.contact-info h1 {
+  font-size: 40px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 20px;
+  max-width: 420px;
+  letter-spacing: -0.01em;
+}
+
+.contact-lead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  max-width: 380px;
+  margin: 0 0 40px;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+}
+
+.contact-detail-label {
+  font-size: 12px;
+  color: #999;
+}
+
+.contact-detail-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+}
+
+/* Signature element: a route line, echoing the trip "from -> to" motif
+   used elsewhere in the app (Explore cards), reimagined as a single
+   pin marking "you are here, message is the next stop." */
+.contact-pin {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.contact-pin-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0EA5E9;
+  flex-shrink: 0;
+}
+
+.contact-pin-line {
+  width: 120px;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #0EA5E9 0,
+    #0EA5E9 4px,
+    transparent 4px,
+    transparent 9px
+  );
+}
+
+/* RIGHT: FORM PANEL */
+.contact-form-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 40px 0 40px 48px;
+  border-left: 1px solid #eee;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+}
+
+.contact-field input,
+.contact-field textarea {
+  font-family: inherit;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: #aaa;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: #0EA5E9;
+}
+
+.contact-submit {
+  margin-top: 4px;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.contact-submit:hover {
+  background: #0EA5E9;
+}
+
+/* SUCCESS STATE */
+.contact-success {
+  width: 100%;
+  max-width: 380px;
+}
+
+.contact-success h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 10px;
+}
+
+.contact-success p {
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+  .contact-page {
+    flex-direction: column;
+  }
+
+  .contact-info {
+    padding: 40px 0 40px;
+  }
+
+  .contact-info h1 {
+    font-size: 32px;
+    max-width: none;
+  }
+
+  .contact-pin {
+    position: static;
+    margin-top: 24px;
+  }
+
+  .contact-form-wrap {
+    padding: 0 0 56px;
+    border-left: none;
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+  }
+}

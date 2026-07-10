@@ -10,15 +10,16 @@ import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 import { PlaceAutocomplete } from "../../components/input/AutoComplete";
 import { TransportList } from "./Transport";
 import { useLocationService, useDistance, useUber, useTransit, useCycling } from '../../hooks/useTransport';
-import { transportOptions } from "../../utils/helper";
+import { transportOptions } from "../../libs/helper";
 import axios from "../../libs/utils/api"
 import { Toast } from "../popup/Toast";
+import { useAuth } from "../../hooks/useAuth";
 
 export const BestRoute = () => {
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const { firstId, secondId, lng, lat, lng2, lat2 } = location.state || {};
-
+  const { auth } = useAuth()
   const fromLocation = searchParams.get("from");
   const budgetPrice = Number(searchParams.get("budget"));
   const toLocation = searchParams.get("to");
@@ -118,7 +119,12 @@ useEffect(() => {
     });
   };
 
-  const handleSaveTrip = async () => {
+const handleSaveTrip = async () => {
+    if (!auth) {
+      navigate("/login");
+      return;
+    }
+
     try {
       // 1. validation (important)
       if (!from || !to || !budget) {
@@ -155,10 +161,10 @@ useEffect(() => {
 
       // 3. API request
       const res = await axios.post(
-    "/trips/create",
-    payload,
-    {},
-  );
+        "/trips/create",
+        payload,
+        {},
+      );
 
       // if (!res.ok) {
       //   const err = await res.json();
@@ -170,7 +176,6 @@ useEffect(() => {
       console.log("Trip saved:", data);
 
       setShowToast(true);
-
 
     } catch (err) {
       console.error("Save trip error:", err);

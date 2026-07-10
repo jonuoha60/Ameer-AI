@@ -51,6 +51,9 @@
   font-size: 42px;
   margin-bottom: 15px;
 }
+.hero-left h2 .highlight {
+  color: #0EA5E9;
+}
 .hero-left p {
   color: #64748b;
   margin-bottom: 30px;

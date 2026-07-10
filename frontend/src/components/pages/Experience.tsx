@@ -2,8 +2,11 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import "../../constants/styles/Experience.css";
 import axios from "../../libs/utils/api";
 import { Toast } from "../popup/Toast";
+import { Supabase } from "../../libs/actions/Supabase";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Experience = () => {
+  const { auth } = useAuth()
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(5);
@@ -14,27 +17,58 @@ export const Experience = () => {
   const [image, setImage] = useState<File | null>(null);
   const [toastMessage, setToastMessage] = useState<ReactNode>("");
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const uploadImage = async (file: File) => {
+    const filePath = `${file.name}-${Date.now()}`;
+
+    const { error } = await Supabase.storage
+      .from("trip-images")
+      .upload(filePath, file);
+
+    if (error) {
+      console.error("Error uploading image: ", error.message);
+      throw error;
+    }
+
+    const { data } = Supabase.storage
+      .from("trip-images")
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    let username = ""
+
+    if(auth) {
+      username = auth.user.username
+    }
 
     try {
+      let photoUrl = "";
+
+      if (image) {
+        photoUrl = await uploadImage(image);
+      }
+
       const formData = new FormData();
 
       formData.append("title", title);
+      formData.append("username", username);
       formData.append("review", review);
       formData.append("rating", String(rating));
       formData.append("from", from);
       formData.append("to", to);
       formData.append("transport", transport);
       formData.append("budget", budget);
-
-      if (image) {
-        formData.append("image", image);
-      }
+      formData.append("photoUrl", photoUrl);
 
       await axios.post("/experience/create", formData);
-      
+
       setToastMessage(
         <span>
           🎉 Experience posted successfully!{" "}
@@ -59,13 +93,16 @@ export const Experience = () => {
       setImage(null);
     } catch (err) {
       setToastMessage("Failed to post");
+      setShowToast(true);
       console.error("Failed to create experience:", err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="experience-page">
-    <Toast message={toastMessage} show={showToast} />
+      <Toast message={toastMessage} show={showToast} />
 
       <div className="experience-card">
         <h1>Share Your Experience</h1>
@@ -146,20 +183,28 @@ export const Experience = () => {
           </div>
 
           <div className="field">
-            <label>Upload Photos</label>
+            <label>Upload Photo</label>
 
             <input
               type="file"
-              multiple
               accept="image/*"
-onChange={(e) => {
+              onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) setImage(file);
-              }}            />
+              }}
+            />
+
+            {image && (
+              <p className="experience-file-name">{image.name}</p>
+            )}
           </div>
 
-          <button type="submit" className="experience-btn">
-            Share Experience
+          <button
+            type="submit"
+            className="experience-btn"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Posting..." : "Share Experience"}
           </button>
         </form>
       </div>

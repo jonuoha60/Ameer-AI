@@ -5,7 +5,7 @@ import axios from "../../libs/utils/api";
 import { Link, useLocation } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useAuth } from "../../hooks/useAuth";
-import { tripMessage } from "../../utils/helper";
+import { tripMessage } from "../../libs/helper";
 
 interface Message {
   id: string;
@@ -183,7 +183,7 @@ useEffect(() => {
 
           {loading && (
             <div className="msg-row ai">
-              <div className="msg-avatar">✈</div>
+              <div className="msg-avatar"><LogoMark /></div>
               <div className="bubble ai">
                 <div className="typing">
                   <span className="typing-dot" />

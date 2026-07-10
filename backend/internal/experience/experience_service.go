@@ -64,3 +64,13 @@ func (s *Service) GetExperience(
 
 	return experience, nil
 }
+
+func (s *Service) GetAllExperiences(ctx context.Context) ([]models.Experience, error) {
+
+	experiences, err := s.repo.GetAllExperiencesDB(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return experiences, nil
+}

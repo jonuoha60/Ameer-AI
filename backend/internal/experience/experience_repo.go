@@ -68,3 +68,22 @@ func (r *Repo) GetExperienceByUserID(
 
 	return experience, nil
 }
+
+func (r *Repo) GetAllExperiencesDB(ctx context.Context) ([]models.Experience, error) {
+	opCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	cursor, err := r.coll.Find(opCtx, bson.M{})
+	if err != nil {
+		return nil, fmt.Errorf("failed to get experiences: %w", err)
+	}
+	defer cursor.Close(opCtx)
+
+	var experiences []models.Experience
+
+	if err := cursor.All(opCtx, &experiences); err != nil {
+		return nil, fmt.Errorf("failed to decode experiences: %w", err)
+	}
+
+	return experiences, nil
+}

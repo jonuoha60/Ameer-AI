@@ -118,7 +118,6 @@ export const Profile = () => {
           <div className="post-feed">
             {experiences.length === 0 ? (
                 <div className="empty-experience">
-    <p className="muted">No experiences yet</p>
 
     <button
       className="post-experience-btn"
@@ -142,14 +141,22 @@ export const Profile = () => {
 
                   {/* EXPERIENCE DETAILS */}
                   <h4>{exp.title}</h4>
+                  <p className="muted">
+                    {exp.from} → {exp.to}
+                  </p>
+
+                   {exp.image && (
+                    <img
+                      className="post-image"
+                      src={exp.image}
+                    />
+                  )}
 
                   <p className="post-text">
                     {exp.review}
                   </p>
 
-                  <p className="muted">
-                    {exp.from} → {exp.to}
-                  </p>
+                  
 
                   <p className="muted">
                     Transport: {exp.transport} | Budget: ${exp.budget}
@@ -163,12 +170,7 @@ export const Profile = () => {
                         {new Date(exp.created_at).toLocaleString()}
                       </p>
 
-                  {exp.image && (
-                    <img
-                      className="post-image"
-                      src={exp.image}
-                    />
-                  )}
+                 
                 </div>
               ))
             )}

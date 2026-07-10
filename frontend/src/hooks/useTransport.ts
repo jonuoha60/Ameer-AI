@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import axios from "../libs/utils/api";
-import { formatedDuration } from "../utils/helper/index";
+import { formatedDuration } from "../libs/helper/index";
 
 
 export const useUber = () => {

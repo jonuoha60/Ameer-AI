@@ -1,169 +1,252 @@
-
-/* =========================
-   PAGE LAYOUT
-========================= */
 .explore-page {
   display: flex;
-  gap: 18px;
-  padding: 18px;
-  background: #f9fafb;
-  min-height: 100vh;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+  align-items: flex-start;
 }
 
-/* =========================
-   FEED (LEFT)
-========================= */
+/* FEED */
 .explore-feed {
-  flex: 2;
+  flex: 1;
+  min-width: 0;
 }
 
 .explore-feed h2 {
-  margin-bottom: 14px;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: #111;
 }
 
-/* =========================
-   POST CARD (SMALLER)
-========================= */
+.explore-search {
+  margin-bottom: 20px;
+}
+
+.explore-search input {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 24px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+}
+
+.explore-search input::placeholder {
+  color: #999;
+}
+
+.explore-search input:focus {
+  border-color: #111;
+}
+
+.explore-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.filter-chip:hover {
+  border-color: #bbb;
+}
+
+.filter-chip.active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
 .explore-card {
-  background: white;
-  border-radius: 12px;
-  padding: 10px;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-  max-width: 520px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 24px;
 }
 
-/* =========================
-   USER HEADER
-========================= */
 .explore-user {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 12px;
+  padding: 14px 16px;
 }
 
-.explore-user img,
+.explore-user strong {
+  font-size: 14px;
+  color: #111;
+}
+
+.explore-user > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.muted {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #888;
+}
+
 .fallback {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-}
-
-/* fallback avatar */
-.fallback {
+  background: #111;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #111827;
-  color: white;
-  font-size: 13px;
-  font-weight: bold;
+  flex-shrink: 0;
+  text-transform: uppercase;
 }
 
-/* =========================
-   IMAGE (SMALLER + CLEAN)
-========================= */
-.explore-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin: 8px 0;
-}
-
-/* =========================
-   TEXT
-========================= */
-.explore-text {
-  font-size: 13px;
-  color: #111827;
-  line-height: 1.4;
-}
-
-/* =========================
-   FOLLOW BUTTON
-========================= */
 .follow-btn {
-  margin-left: auto;
-  background: #111827;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 7px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 11px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .follow-btn:hover {
-  background: #1f2937;
+  background: #333;
 }
 
-/* =========================
-   SIDEBAR (SMALLER + CLEAN)
-========================= */
+.explore-image {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.explore-text {
+  padding: 14px 16px 18px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #222;
+}
+
+/* SIDEBAR */
 .explore-sidebar {
-  flex: 0.8;               /* 👈 makes it smaller */
-  background: white;
-  padding: 12px;
-  border-radius: 12px;
-  height: fit-content;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  width: 280px;
+  flex-shrink: 0;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  padding: 18px;
+  position: sticky;
+  top: 24px;
 }
 
-/* sidebar title */
 .explore-sidebar h3 {
   font-size: 15px;
-  margin-bottom: 10px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: #111;
 }
 
-/* =========================
-   SUGGESTED USERS (COMPACT)
-========================= */
 .suggest-user {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 8px 0;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.suggest-user:last-child {
+  border-bottom: none;
 }
 
 .suggest-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  min-width: 0;
 }
 
 .suggest-left span {
   font-size: 13px;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* mini avatar */
-.fallback.small {
-  width: 28px;
-  height: 28px;
-  font-size: 12px;
-}
-
-/* follow button smaller */
 .mini-follow {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 4px 7px;
-  border-radius: 6px;
-  font-size: 11px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 16px;
   cursor: pointer;
+  transition: background 0.15s ease;
+  flex-shrink: 0;
 }
 
 .mini-follow:hover {
-  background: #1d4ed8;
+  background: #f0f0f0;
 }
 
-/* =========================
-   MUTED TEXT
-========================= */
-.muted {
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.star {
+  font-size: 15px;
+  color: #d1d5db;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.rating-value {
+  margin-left: 6px;
+  font-size: 13px;
   color: #6b7280;
-  font-size: 12px;
+  font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+  .explore-page {
+    flex-direction: column;
+  }
+
+  .explore-sidebar {
+    width: 100%;
+    position: static;
+  }
 }

@@ -26,17 +26,7 @@ func (h *Handler) CreateUserExperience(c *gin.Context) {
 	transport := c.PostForm("transport")
 	budget := c.PostForm("budget")
 	rating := c.PostForm("rating")
-
-	file, err := c.FormFile("image")
-	var imageURL string
-
-	if err == nil {
-		path := "uploads/" + file.Filename
-
-		if err := c.SaveUploadedFile(file, path); err == nil {
-			imageURL = path
-		}
-	}
+	photoUrl := c.PostForm("photoUrl")
 
 	ratingInt, _ := strconv.Atoi(rating)
 	budgetFloat, _ := strconv.ParseFloat(budget, 64)
@@ -49,7 +39,7 @@ func (h *Handler) CreateUserExperience(c *gin.Context) {
 		Rating:    ratingInt,
 		Transport: transport,
 		Budget:    budgetFloat,
-		Image:     imageURL,
+		Image:     photoUrl,
 		CreatedAt: time.Now().UTC(),
 	}
 
@@ -94,5 +84,21 @@ func (h *Handler) GetUserExperience(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"experience": experience,
+	})
+}
+
+func (h *Handler) GetExperiences(c *gin.Context) {
+
+
+	experiences, err := h.Service.GetAllExperiences(c.Request.Context())
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"experience": experiences,
 	})
 }

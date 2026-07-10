@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type Handler struct {
@@ -33,7 +34,7 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 		return
 	}
 
-	if created == (AuthResponse{}) {
+	if created.AccessToken == "" {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to create user",
 		})
@@ -62,6 +63,7 @@ func (h *Handler) GoogleCreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, created)
 }
+
 func (h *Handler) CreateUser(c *gin.Context) {
 	var req models.User
 
@@ -80,7 +82,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	if created == (AuthResponse{}) {
+	if created.AccessToken == "" {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to create user",
 		})
@@ -151,6 +153,32 @@ func (h *Handler) GetUser(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
+func (h *Handler) GetUsers(c *gin.Context) {
+	id := c.Param("id")
+
+	objID, err := bson.ObjectIDFromHex(id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "invalid user id",
+		})
+		return
+	}
+
+	user, err := h.Service.GetUserByID(c.Request.Context(), objID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "user not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"id":       user.ID.Hex(),
+		"username": user.Username,
+		"photo":    user.PhotoURL,
+	})
+}
+
 func (h *Handler) LogoutUser(c *gin.Context) {
 	// Clear the refresh token cookie
 	http.SetCookie(c.Writer, &http.Cookie{
@@ -177,4 +205,36 @@ func (h *Handler) LogoutUser(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Successfully logged out",
 	})
+}
+
+func (h *Handler) FollowUser(c *gin.Context) {
+	followingId := c.Param("followingId")
+	userID, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error": "unauthorized",
+		})
+		return
+	}
+
+	idStr, ok := userID.(string)
+
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "invalid userid",
+		})
+	}
+
+	following, err := h.Service.CreateUserFollowing(c.Request.Context(), idStr, followingId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"following": following,
+	})
+
 }
