@@ -58,7 +58,6 @@ export const Footer = () => {
         <div className="footer-bottom-links">
           <Link to="/privacy-policy">Privacy</Link>
           <Link to="/terms-of-service">Terms</Link>
-          <Link to="/accessibility">Accessibility</Link>
         </div>
       </div>
     </footer>

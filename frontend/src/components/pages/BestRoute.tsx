@@ -35,7 +35,7 @@ export const BestRoute = () => {
   const [showType, setShowType] = useState<"distance" | "duration">("distance");
   const [firstPlaceId, setFirstPlaceId] = useState<string>(firstId || "");
   const [secondPlaceId, setSecondPlaceId] = useState<string>(secondId || "");
- 
+  const [tripSaved, setTripSaved] = useState(false);
   const [center, setCenter] = useState({
     lat: lat || 43.6532,
     lng: lng || -79.3832,
@@ -166,16 +166,11 @@ const handleSaveTrip = async () => {
         {},
       );
 
-      // if (!res.ok) {
-      //   const err = await res.json();
-      //   throw new Error(err?.error || "Failed to save trip");
-      // }
-
       const data = res.data;
 
-      console.log("Trip saved:", data);
 
       setShowToast(true);
+      setTripSaved(true);
 
     } catch (err) {
       console.error("Save trip error:", err);
@@ -448,7 +443,13 @@ onClick={handleSwitch}
 
         </div>
         <div className="budget-btn">
-  <button onClick={handleSaveTrip} className="save-trip-btn">Save Trip</button>
+<button
+  onClick={handleSaveTrip}
+  className="save-trip-btn"
+  disabled={tripSaved}
+>
+  {tripSaved ? "Trip Saved" : "Save Trip"}
+</button>
   <button onClick={handleAskAmeer} className="ask-ameer-btn">Ask Ameer</button>
 </div>
       </div>
