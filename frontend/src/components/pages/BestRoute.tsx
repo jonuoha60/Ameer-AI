@@ -166,7 +166,7 @@ const handleSaveTrip = async () => {
         {},
       );
 
-      const data = res.data;
+      // const data = res.data;
 
 
       setShowToast(true);
