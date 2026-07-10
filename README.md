@@ -113,6 +113,8 @@ VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 VITE_FIREBASE_MEASUREMENT_ID=
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
 ```
 - 📁 Backend .env.local
 ```env
@@ -196,6 +198,7 @@ Replace the placeholder values with your actual Gemini API keys JWT SECRETS.
 * Smart expense budgeting system that provides real-time financial guidance for affordable and stress-free travel
 * Secure user authentication to personalize experiences and store user-specific travel data
 * Interactive map integration powered by Google Maps for route visualization and trip planning
+* Explore page to help you check out others review about Ameer AI and places they went to by budgeting
 
 ---
 
@@ -206,6 +209,7 @@ Replace the placeholder values with your actual Gemini API keys JWT SECRETS.
 - **MongoDB**: For retrieving and storing user data, trip budgeting, history and authentication records. 
 - **Google Maps API**: Provides geolocation services, route planning, distance calculation, and interactive map visualization.
 - **GeminiAPI**: Powers the AI travel assistant, offering intelligent budgeting advice, trip recommendations, and conversational support.
+- **Supabase**: Used for cloud-based image storage, allowing users to upload, manage, and retrieve travel-related images efficiently through Supabase Storage.
 
 ## Front-End Design
 The front-end is built with Next.js and TailwindCSS, providing a smooth user experience for uploading, processing, and downloading images. The app is responsive and works across a variety of devices.
