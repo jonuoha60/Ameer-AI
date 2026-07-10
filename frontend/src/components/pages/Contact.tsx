@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import "../../constants/styles/Contact.css";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -9,17 +9,19 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name || !email || !message) return;
+ const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    // TODO: wire up to backend endpoint (e.g. axios.post("/contact", { name, email, message }))
-    console.log("Contact form submitted:", { name, email, message });
-    setSent(true);
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
+  if (!name || !email || !message) return;
+
+  // TODO: wire up to backend endpoint (e.g. axios.post("/contact", { name, email, message }))
+  console.log("Contact form submitted:", { name, email, message });
+
+  setSent(true);
+  setName("");
+  setEmail("");
+  setMessage("");
+};
 
   return (
     <div>
