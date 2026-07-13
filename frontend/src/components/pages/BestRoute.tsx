@@ -166,12 +166,14 @@ const handleSaveTrip = async () => {
         {},
       );
 
-      // const data = res.data;
+      const data = res.data;
 
-
+      if(data) {
       setShowToast(true);
       setTripSaved(true);
 
+      }
+      
     } catch (err) {
       console.error("Save trip error:", err);
     }
